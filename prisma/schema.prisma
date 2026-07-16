@@ -1,0 +1,48 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+
+
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  name          String?
+  role          String    @default("OWNER")
+  storeId       String?
+  store         Store?    @relation(fields: [storeId], references: [id])
+  accounts      Account[]
+  sessions      Session[]
+}
+
+model Account {
+  id           String    @id @default(uuid())
+  userId       String
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  providerId   String
+  accountId    String
+  accessToken  String?
+  refreshToken String?
+  createdAt    DateTime  @default(now())
+}
+
+model Session {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  token     String   @unique
+  expiresAt DateTime
+}
+
+model Store {
+  id           String   @id @default(uuid())
+  name         String
+  businessType String 
+  users        User[]
+  createdAt    DateTime @default(now())
+}
