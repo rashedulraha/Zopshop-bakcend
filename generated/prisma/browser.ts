@@ -37,3 +37,8 @@ export type Session = Prisma.SessionModel
  * 
  */
 export type Store = Prisma.StoreModel
+/**
+ * Model Verification
+ * 
+ */
+export type Verification = Prisma.VerificationModel

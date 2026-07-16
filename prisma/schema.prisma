@@ -1,3 +1,4 @@
+
 generator client {
   provider = "prisma-client"
   output   = "../generated/prisma"
@@ -7,28 +8,42 @@ datasource db {
   provider = "postgresql"
 }
 
-
-
 model User {
   id            String    @id @default(uuid())
-  email         String    @unique
   name          String?
+  email         String    @unique
+  emailVerified Boolean   @default(false)
+  image         String?
   role          String    @default("OWNER")
   storeId       String?
   store         Store?    @relation(fields: [storeId], references: [id])
   accounts      Account[]
   sessions      Session[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@map("user")
 }
 
 model Account {
-  id           String    @id @default(uuid())
-  userId       String
-  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  providerId   String
-  accountId    String
-  accessToken  String?
-  refreshToken String?
-  createdAt    DateTime  @default(now())
+  id                    String    @id @default(uuid())
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  providerId            String
+  accountId             String
+  accessToken           String?
+  refreshToken          String?
+  createdAt             DateTime  @default(now())
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  updatedAt             DateTime  @updatedAt
+
+  @@index([userId])
+  @@unique([providerId, accountId])
+  @@map("account")
 }
 
 model Session {
@@ -37,12 +52,33 @@ model Session {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   token     String   @unique
   expiresAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+
+  @@index([userId])
+  @@map("session")
 }
 
 model Store {
   id           String   @id @default(uuid())
   name         String
-  businessType String 
+  businessType String
   users        User[]
   createdAt    DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@unique([identifier, value])
+  @@map("verification")
 }

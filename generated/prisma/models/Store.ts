@@ -29,6 +29,7 @@ export type StoreMinAggregateOutputType = {
   name: string | null
   businessType: string | null
   createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type StoreMaxAggregateOutputType = {
@@ -36,6 +37,7 @@ export type StoreMaxAggregateOutputType = {
   name: string | null
   businessType: string | null
   createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type StoreCountAggregateOutputType = {
@@ -43,6 +45,7 @@ export type StoreCountAggregateOutputType = {
   name: number
   businessType: number
   createdAt: number
+  updatedAt: number
   _all: number
 }
 
@@ -52,6 +55,7 @@ export type StoreMinAggregateInputType = {
   name?: true
   businessType?: true
   createdAt?: true
+  updatedAt?: true
 }
 
 export type StoreMaxAggregateInputType = {
@@ -59,6 +63,7 @@ export type StoreMaxAggregateInputType = {
   name?: true
   businessType?: true
   createdAt?: true
+  updatedAt?: true
 }
 
 export type StoreCountAggregateInputType = {
@@ -66,6 +71,7 @@ export type StoreCountAggregateInputType = {
   name?: true
   businessType?: true
   createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -146,6 +152,7 @@ export type StoreGroupByOutputType = {
   name: string
   businessType: string
   createdAt: Date
+  updatedAt: Date
   _count: StoreCountAggregateOutputType | null
   _min: StoreMinAggregateOutputType | null
   _max: StoreMaxAggregateOutputType | null
@@ -174,6 +181,7 @@ export type StoreWhereInput = {
   name?: Prisma.StringFilter<"Store"> | string
   businessType?: Prisma.StringFilter<"Store"> | string
   createdAt?: Prisma.DateTimeFilter<"Store"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Store"> | Date | string
   users?: Prisma.UserListRelationFilter
 }
 
@@ -182,6 +190,7 @@ export type StoreOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   businessType?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   users?: Prisma.UserOrderByRelationAggregateInput
 }
 
@@ -193,6 +202,7 @@ export type StoreWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"Store"> | string
   businessType?: Prisma.StringFilter<"Store"> | string
   createdAt?: Prisma.DateTimeFilter<"Store"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Store"> | Date | string
   users?: Prisma.UserListRelationFilter
 }, "id">
 
@@ -201,6 +211,7 @@ export type StoreOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
   businessType?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.StoreCountOrderByAggregateInput
   _max?: Prisma.StoreMaxOrderByAggregateInput
   _min?: Prisma.StoreMinOrderByAggregateInput
@@ -214,6 +225,7 @@ export type StoreScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<"Store"> | string
   businessType?: Prisma.StringWithAggregatesFilter<"Store"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Store"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Store"> | Date | string
 }
 
 export type StoreCreateInput = {
@@ -221,6 +233,7 @@ export type StoreCreateInput = {
   name: string
   businessType: string
   createdAt?: Date | string
+  updatedAt?: Date | string
   users?: Prisma.UserCreateNestedManyWithoutStoreInput
 }
 
@@ -229,6 +242,7 @@ export type StoreUncheckedCreateInput = {
   name: string
   businessType: string
   createdAt?: Date | string
+  updatedAt?: Date | string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutStoreInput
 }
 
@@ -237,6 +251,7 @@ export type StoreUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   businessType?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUpdateManyWithoutStoreNestedInput
 }
 
@@ -245,6 +260,7 @@ export type StoreUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   businessType?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUncheckedUpdateManyWithoutStoreNestedInput
 }
 
@@ -253,6 +269,7 @@ export type StoreCreateManyInput = {
   name: string
   businessType: string
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type StoreUpdateManyMutationInput = {
@@ -260,6 +277,7 @@ export type StoreUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   businessType?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type StoreUncheckedUpdateManyInput = {
@@ -267,6 +285,7 @@ export type StoreUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   businessType?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type StoreNullableScalarRelationFilter = {
@@ -279,6 +298,7 @@ export type StoreCountOrderByAggregateInput = {
   name?: Prisma.SortOrder
   businessType?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type StoreMaxOrderByAggregateInput = {
@@ -286,6 +306,7 @@ export type StoreMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   businessType?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type StoreMinOrderByAggregateInput = {
@@ -293,6 +314,7 @@ export type StoreMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   businessType?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type StoreCreateNestedOneWithoutUsersInput = {
@@ -316,6 +338,7 @@ export type StoreCreateWithoutUsersInput = {
   name: string
   businessType: string
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type StoreUncheckedCreateWithoutUsersInput = {
@@ -323,6 +346,7 @@ export type StoreUncheckedCreateWithoutUsersInput = {
   name: string
   businessType: string
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type StoreCreateOrConnectWithoutUsersInput = {
@@ -346,6 +370,7 @@ export type StoreUpdateWithoutUsersInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   businessType?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type StoreUncheckedUpdateWithoutUsersInput = {
@@ -353,6 +378,7 @@ export type StoreUncheckedUpdateWithoutUsersInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   businessType?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -391,6 +417,7 @@ export type StoreSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   name?: boolean
   businessType?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   users?: boolean | Prisma.Store$usersArgs<ExtArgs>
   _count?: boolean | Prisma.StoreCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["store"]>
@@ -400,6 +427,7 @@ export type StoreSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   name?: boolean
   businessType?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
 }, ExtArgs["result"]["store"]>
 
 export type StoreSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -407,6 +435,7 @@ export type StoreSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   name?: boolean
   businessType?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
 }, ExtArgs["result"]["store"]>
 
 export type StoreSelectScalar = {
@@ -414,9 +443,10 @@ export type StoreSelectScalar = {
   name?: boolean
   businessType?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type StoreOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "businessType" | "createdAt", ExtArgs["result"]["store"]>
+export type StoreOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "businessType" | "createdAt" | "updatedAt", ExtArgs["result"]["store"]>
 export type StoreInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   users?: boolean | Prisma.Store$usersArgs<ExtArgs>
   _count?: boolean | Prisma.StoreCountOutputTypeDefaultArgs<ExtArgs>
@@ -434,6 +464,7 @@ export type $StorePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     name: string
     businessType: string
     createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["store"]>
   composites: {}
 }
@@ -862,6 +893,7 @@ export interface StoreFieldRefs {
   readonly name: Prisma.FieldRef<"Store", 'String'>
   readonly businessType: Prisma.FieldRef<"Store", 'String'>
   readonly createdAt: Prisma.FieldRef<"Store", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"Store", 'DateTime'>
 }
     
 
