@@ -2,15 +2,19 @@ import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { PrismaClient } from "../../generated/prisma/client.js";
 import { adapter } from "./prisma.js";
+import { config } from "../config/config.js";
 
 const prisma = new PrismaClient({ adapter });
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
     provider: "postgresql",
   }),
-  emailAndPassword: {
-    enabled: true,
+
+  emailAndPassword: { enabled: true },
+  emailVerification: {
+    sendOnSignIn: true,
   },
+  trustedOrigins: [config.zop_shop_trust_origin as string],
   socialProviders: {
     google: {
       clientId: process.env.GOOGLE_CLIENT_ID as string,
