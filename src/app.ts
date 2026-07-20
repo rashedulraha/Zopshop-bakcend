@@ -66,14 +66,18 @@ import { partyRoutes } from "./modules/party/party.routes.js";
 
 import { transactionRoutes } from "./modules/transaction/transaction.routes.js";
 
+import { reportRoutes } from "./modules/report/report.routes.js";
+
+import { categoryRoutes } from "./modules/category/category.routes.js";
+import { configRoutes } from "./modules/config/config.routes.js";
+
 // --- Modules Placeholders (Protected + Store Bound) ---
-// Example implementation pattern:
-// app.use("/api/categories", requireAuth, requireStore, categoryRoutes);
+app.use("/api/categories", requireAuth, requireStore, categoryRoutes);
 app.use("/api/products", requireAuth, requireStore, productRoutes);
 app.use("/api/parties", requireAuth, requireStore, partyRoutes);
 app.use("/api/transactions", requireAuth, requireStore, transactionRoutes);
-// app.use("/api/reports", requireAuth, requireStore, reportRoutes);
-// app.use("/api/store", requireAuth, storeRoutes); // Store settings, might not need requireStore if managing stores
+app.use("/api/reports", requireAuth, requireStore, reportRoutes);
+app.use("/api/config", requireAuth, requireStore, configRoutes);
 
 // =======================
 // Error Handling
