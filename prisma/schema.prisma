@@ -124,6 +124,7 @@ model Category {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 
+  @@unique([name, storeId])
   @@index([storeId])
   @@map("category")
 }
