@@ -15,8 +15,7 @@ import { requireAuth } from "./shared/middlewares/auth.middleware.js";
 import { requireStore } from "./shared/middlewares/store.middleware.js";
 
 // Existing routes
-import { authRoute } from "./module/auth/auth.route.js";
-import { meRouter } from "./module/me/me.route.js";
+import { authRoutes } from "./modules/auth/auth.routes.js";
 
 export const app: Application = express();
 
@@ -54,11 +53,8 @@ app.get("/health", (req: Request, res: Response) => {
 // API Routes
 // =======================
 
-// Auth routes (better-auth)
-app.use("/api/auth", authRoute);
-
-// Current user routes
-app.use("/api/me", requireAuth, meRouter);
+// Auth routes (better-auth + custom me/signout)
+app.use("/api/auth", authRoutes);
 
 import { productRoutes } from "./modules/product/product.routes.js";
 
