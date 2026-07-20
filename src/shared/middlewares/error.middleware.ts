@@ -9,8 +9,6 @@ export const errorHandler = (
   res: Response<ApiResponse>,
   next: NextFunction,
 ) => {
-  console.error("Error occurred:", err);
-
   let statusCode = err.statusCode || 500;
   let message = err.message || "Internal Server Error";
   let errors = null;
@@ -21,13 +19,23 @@ export const errorHandler = (
     message = "Validation Error";
     errors = err.flatten().fieldErrors;
   }
-  // Basic check for Prisma errors (you can expand this with Prisma.PrismaClientKnownRequestError later)
+  // Basic check for Prisma errors
   else if (err?.code && typeof err.code === "string" && err.code.startsWith("P2")) {
     statusCode = 400;
     message = "Database Error";
     if (err.code === "P2002") {
       message = "Unique constraint failed";
+    } else if (err.code === "P2025") {
+      statusCode = 404;
+      message = "Record not found";
     }
+  }
+
+  // Development logging
+  if (process.env.NODE_ENV === "development") {
+    console.error(err.stack || err);
+  } else {
+    console.error("Error occurred:", message);
   }
 
   res.status(statusCode).json({
