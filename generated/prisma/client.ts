@@ -66,3 +66,33 @@ export type Store = Prisma.StoreModel
  * 
  */
 export type Verification = Prisma.VerificationModel
+/**
+ * Model Category
+ * 
+ */
+export type Category = Prisma.CategoryModel
+/**
+ * Model Product
+ * 
+ */
+export type Product = Prisma.ProductModel
+/**
+ * Model Party
+ * 
+ */
+export type Party = Prisma.PartyModel
+/**
+ * Model Transaction
+ * 
+ */
+export type Transaction = Prisma.TransactionModel
+/**
+ * Model TransactionItem
+ * 
+ */
+export type TransactionItem = Prisma.TransactionItemModel
+/**
+ * Model Config
+ * 
+ */
+export type Config = Prisma.ConfigModel

@@ -55,7 +55,13 @@ export const ModelName = {
   Account: 'Account',
   Session: 'Session',
   Store: 'Store',
-  Verification: 'Verification'
+  Verification: 'Verification',
+  Category: 'Category',
+  Product: 'Product',
+  Party: 'Party',
+  Transaction: 'Transaction',
+  TransactionItem: 'TransactionItem',
+  Config: 'Config'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -145,12 +151,123 @@ export const VerificationScalarFieldEnum = {
 export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum]
 
 
+export const CategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  storeId: 'storeId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
+
+
+export const ProductScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  categoryId: 'categoryId',
+  storeId: 'storeId',
+  unit: 'unit',
+  price: 'price',
+  purchasePrice: 'purchasePrice',
+  stock: 'stock',
+  sku: 'sku',
+  barcode: 'barcode',
+  attributes: 'attributes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
+
+
+export const PartyScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  mobile: 'mobile',
+  email: 'email',
+  address: 'address',
+  storeId: 'storeId',
+  type: 'type',
+  openingBalance: 'openingBalance',
+  customData: 'customData',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PartyScalarFieldEnum = (typeof PartyScalarFieldEnum)[keyof typeof PartyScalarFieldEnum]
+
+
+export const TransactionScalarFieldEnum = {
+  id: 'id',
+  invoiceNo: 'invoiceNo',
+  storeId: 'storeId',
+  partyId: 'partyId',
+  type: 'type',
+  mode: 'mode',
+  amount: 'amount',
+  discount: 'discount',
+  tax: 'tax',
+  netAmount: 'netAmount',
+  paidAmount: 'paidAmount',
+  dueAmount: 'dueAmount',
+  note: 'note',
+  transactionDate: 'transactionDate',
+  customData: 'customData',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TransactionScalarFieldEnum = (typeof TransactionScalarFieldEnum)[keyof typeof TransactionScalarFieldEnum]
+
+
+export const TransactionItemScalarFieldEnum = {
+  id: 'id',
+  transactionId: 'transactionId',
+  productId: 'productId',
+  quantity: 'quantity',
+  unitPrice: 'unitPrice',
+  totalPrice: 'totalPrice',
+  discount: 'discount',
+  tax: 'tax',
+  netPrice: 'netPrice',
+  createdAt: 'createdAt'
+} as const
+
+export type TransactionItemScalarFieldEnum = (typeof TransactionItemScalarFieldEnum)[keyof typeof TransactionItemScalarFieldEnum]
+
+
+export const ConfigScalarFieldEnum = {
+  id: 'id',
+  storeId: 'storeId',
+  enableCredit: 'enableCredit',
+  enableStock: 'enableStock',
+  enableExpense: 'enableExpense',
+  currency: 'currency',
+  dateFormat: 'dateFormat',
+  businessType: 'businessType',
+  customFields: 'customFields',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ConfigScalarFieldEnum = (typeof ConfigScalarFieldEnum)[keyof typeof ConfigScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const NullableJsonNullValueInput = {
+  DbNull: DbNull,
+  JsonNull: JsonNull
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
 export const QueryMode = {
@@ -167,4 +284,13 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
