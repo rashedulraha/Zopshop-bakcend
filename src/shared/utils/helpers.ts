@@ -62,3 +62,21 @@ export const getDateRange = (
 
   return { start, end };
 };
+
+/**
+ * Validate date string
+ * @param date date string to validate
+ */
+export const isValidDate = (date: string): boolean => {
+  const d = new Date(date);
+  return d instanceof Date && !isNaN(d.getTime());
+};
+
+/**
+ * Sanitize search input by removing special characters
+ * @param query search query
+ */
+export const sanitizeSearchQuery = (query: string): string => {
+  if (!query) return "";
+  return query.replace(/[^a-zA-Z0-9\s-_]/g, "").trim();
+};
