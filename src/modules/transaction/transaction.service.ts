@@ -160,4 +160,176 @@ export const TransactionService = {
       },
     });
   },
+
+  async updateTransaction(id: string, storeId: string, data: UpdateTransactionDTO) {
+    // Note: A full update handles replacing items. It reverses the old transaction's stock effects,
+    // deletes old items, and applies new effects and new items.
+    return await prisma.$transaction(async (tx) => {
+      const oldTx = await tx.transaction.findFirst({
+        where: { id, storeId },
+        include: { items: true },
+      });
+
+      if (!oldTx) throw new Error("Transaction not found");
+
+      // 1. Reverse old stock effects
+      if (oldTx.type === "SALE" || oldTx.type === "PURCHASE") {
+        for (const item of oldTx.items) {
+          const operation = oldTx.type === "SALE" ? "increment" : "decrement"; // Reverse
+          await tx.product.update({
+            where: { id: item.productId },
+            data: { stock: { [operation]: item.quantity } },
+          });
+        }
+      }
+
+      // 2. Delete old items
+      await tx.transactionItem.deleteMany({
+        where: { transactionId: id },
+      });
+
+      // 3. Prepare new data
+      const type = data.type || (oldTx.type as TransactionTypeEnum);
+      const amount = data.amount ?? oldTx.amount;
+      const discount = data.discount ?? oldTx.discount;
+      const tax = data.tax ?? oldTx.tax;
+      const paidAmount = data.paidAmount ?? oldTx.paidAmount;
+      
+      const netAmount = calculateNetAmount(amount, discount, tax);
+      const dueAmount = netAmount - paidAmount;
+      
+      const items = data.items || [];
+
+      // 4. Update transaction with new items
+      const updatedTx = await tx.transaction.update({
+        where: { id },
+        data: {
+          partyId: data.partyId !== undefined ? (data.partyId || null) : oldTx.partyId,
+          type,
+          mode: data.mode || oldTx.mode,
+          amount,
+          discount,
+          tax,
+          netAmount,
+          paidAmount,
+          dueAmount,
+          note: data.note !== undefined ? (data.note || null) : oldTx.note,
+          transactionDate: data.transactionDate ? new Date(data.transactionDate) : oldTx.transactionDate,
+          customData: (data.customData !== undefined ? data.customData : oldTx.customData) as any,
+          items: {
+            create: items.map((item) => ({
+              productId: item.productId,
+              quantity: item.quantity,
+              unitPrice: item.unitPrice,
+              totalPrice: item.quantity * item.unitPrice,
+              netPrice: item.quantity * item.unitPrice,
+            })),
+          },
+        },
+        include: {
+          items: true,
+          party: { select: { id: true, name: true } },
+        },
+      });
+
+      // 5. Apply new stock effects
+      if (type === "SALE" || type === "PURCHASE") {
+        for (const item of items) {
+          const operation = type === "SALE" ? "decrement" : "increment";
+          await tx.product.update({
+            where: { id: item.productId },
+            data: { stock: { [operation]: item.quantity } },
+          });
+        }
+      }
+
+      return updatedTx;
+    });
+  },
+
+  async deleteTransaction(id: string, storeId: string) {
+    return await prisma.$transaction(async (tx) => {
+      const oldTx = await tx.transaction.findFirst({
+        where: { id, storeId },
+        include: { items: true },
+      });
+
+      if (!oldTx) return false;
+
+      // Reverse stock effects
+      if (oldTx.type === "SALE" || oldTx.type === "PURCHASE") {
+        for (const item of oldTx.items) {
+          const operation = oldTx.type === "SALE" ? "increment" : "decrement"; // Reverse
+          await tx.product.update({
+            where: { id: item.productId },
+            data: { stock: { [operation]: item.quantity } },
+          });
+        }
+      }
+
+      // Delete items and transaction (assuming Cascade is on or doing it manually)
+      // We'll do it manually to be safe if cascade isn't configured, but schema has onDelete: Cascade
+      await tx.transaction.delete({
+        where: { id },
+      });
+
+      return true;
+    });
+  },
+
+  async getDailySummary(storeId: string, dateStr?: string) {
+    const date = dateStr ? new Date(dateStr) : new Date();
+    date.setHours(0, 0, 0, 0);
+    
+    const nextDay = new Date(date);
+    nextDay.setDate(nextDay.getDate() + 1);
+
+    const transactions = await prisma.transaction.findMany({
+      where: {
+        storeId,
+        transactionDate: {
+          gte: date,
+          lt: nextDay,
+        },
+      },
+      select: {
+        type: true,
+        netAmount: true,
+        paidAmount: true,
+      },
+    });
+
+    const summary = {
+      totalSales: 0,
+      totalPurchases: 0,
+      totalExpenses: 0,
+      totalPaymentsReceived: 0,
+      totalPaymentsSent: 0,
+    };
+
+    for (const tx of transactions) {
+      switch (tx.type) {
+        case "SALE":
+          summary.totalSales += tx.netAmount;
+          break;
+        case "PURCHASE":
+          summary.totalPurchases += tx.netAmount;
+          break;
+        case "EXPENSE":
+          summary.totalExpenses += tx.netAmount;
+          break;
+        case "PAYMENT_RECEIVED":
+          summary.totalPaymentsReceived += tx.netAmount; // Or paidAmount if mapped that way, but amount is stored as netAmount
+          break;
+        case "PAYMENT_SENT":
+          summary.totalPaymentsSent += tx.netAmount;
+          break;
+      }
+    }
+
+    return {
+      date: date.toISOString().split("T")[0],
+      summary,
+    };
+  },
 };
