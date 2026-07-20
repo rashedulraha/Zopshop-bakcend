@@ -62,11 +62,13 @@ app.use("/api/me", requireAuth, meRouter);
 
 import { productRoutes } from "./modules/product/product.routes.js";
 
+import { partyRoutes } from "./modules/party/party.routes.js";
+
 // --- Modules Placeholders (Protected + Store Bound) ---
 // Example implementation pattern:
 // app.use("/api/categories", requireAuth, requireStore, categoryRoutes);
 app.use("/api/products", requireAuth, requireStore, productRoutes);
-// app.use("/api/parties", requireAuth, requireStore, partyRoutes);
+app.use("/api/parties", requireAuth, requireStore, partyRoutes);
 // app.use("/api/transactions", requireAuth, requireStore, transactionRoutes);
 // app.use("/api/reports", requireAuth, requireStore, reportRoutes);
 // app.use("/api/store", requireAuth, storeRoutes); // Store settings, might not need requireStore if managing stores
