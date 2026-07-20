@@ -29,7 +29,10 @@ export const PartyController = {
   ) {
     try {
       const storeId = req.storeId!;
-      const result = await PartyService.getAllParties(storeId, req.query as any);
+      const result = await PartyService.getAllParties(
+        storeId,
+        req.query as any,
+      );
 
       return res.status(200).json({
         success: true,
@@ -78,7 +81,11 @@ export const PartyController = {
       const storeId = req.storeId!;
       const id = req.params.id as string;
 
-      const updatedParty = await PartyService.updateParty(id, storeId, req.body);
+      const updatedParty = await PartyService.updateParty(
+        id,
+        storeId,
+        req.body,
+      );
 
       if (!updatedParty) {
         return res.status(404).json({
@@ -162,7 +169,11 @@ export const PartyController = {
       const storeId = req.storeId!;
       const id = req.params.id as string;
 
-      const result = await PartyService.getPartyTransactions(id, storeId, req.query as any);
+      const result = await PartyService.getPartyTransactions(
+        id,
+        storeId,
+        req.query as any,
+      );
 
       return res.status(200).json({
         success: true,
