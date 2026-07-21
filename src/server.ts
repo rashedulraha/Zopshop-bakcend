@@ -1,9 +1,6 @@
 import { app } from "./app.js";
 import { config } from "./config/index.js";
-import { adapter } from "./lib/prisma.js";
-import { PrismaClient } from "../generated/prisma/client.js";
-
-const prisma = new PrismaClient({ adapter });
+import { prisma } from "./lib/prisma.js";
 
 const startServer = async () => {
   try {
@@ -14,7 +11,9 @@ const startServer = async () => {
     // Start Express server
     const port = config.PORT;
     const server = app.listen(Number(port), "0.0.0.0", () => {
-      console.log(`🚀 Server is running in ${config.NODE_ENV} mode on port ${port}`);
+      console.log(
+        `🚀 Server is running in ${config.NODE_ENV} mode on port ${port}`,
+      );
     });
 
     // Graceful Shutdown
@@ -24,7 +23,6 @@ const startServer = async () => {
       await prisma.$disconnect();
       process.exit(0);
     });
-
   } catch (error) {
     console.error("❌ Failed to start the server:", error);
     await prisma.$disconnect();

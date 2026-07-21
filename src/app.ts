@@ -74,6 +74,7 @@ import { financeRoutes } from "./modules/finance/finance.routes.js";
 import { deliveryRoutes } from "./modules/delivery/delivery.routes.js";
 import { userRoutes } from "./modules/user/user.routes.js";
 import { settingsRoutes } from "./modules/settings/settings.routes.js";
+import { adminRoutes } from "./modules/admin/admin.routes.js";
 
 // --- Modules Placeholders (Protected + Store Bound) ---
 app.use("/api/stores", requireAuth, storeRoutes);
@@ -90,6 +91,7 @@ app.use("/api/parties", requireAuth, requireStore, partyRoutes);
 app.use("/api/transactions", requireAuth, requireStore, transactionRoutes);
 app.use("/api/reports", requireAuth, requireStore, reportRoutes);
 app.use("/api/config", requireAuth, requireStore, configRoutes);
+app.use("/api/admin", adminRoutes);
 
 // =======================
 // Error Handling
