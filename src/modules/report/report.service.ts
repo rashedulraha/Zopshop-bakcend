@@ -8,13 +8,19 @@ export const ReportService = {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    const [totalProducts, totalParties, lowStockCount, recentTransactions, todayTransactions] = await Promise.all([
+    const [
+      totalProducts,
+      totalParties,
+      lowStockCount,
+      recentTransactions,
+      todayTransactions,
+    ] = await Promise.all([
       prisma.product.count({ where: { storeId } }),
       prisma.party.count({ where: { storeId } }),
       prisma.product.count({ where: { storeId, stock: { lt: 10 } } }), // using 10 as default threshold
       prisma.transaction.findMany({
         where: { storeId },
-        orderBy: { transactionDate: 'desc' },
+        orderBy: { transactionDate: "desc" },
         take: 10,
         include: { party: { select: { name: true } } },
       }),
@@ -31,7 +37,8 @@ export const ReportService = {
     todayTransactions.forEach((tx) => {
       if (tx.type === "SALE") todaySales += tx.netAmount;
       if (tx.type === "PAYMENT_RECEIVED") todayCollections += tx.netAmount;
-      if (tx.type === "EXPENSE" || tx.type === "PAYMENT_SENT") todayExpenses += tx.netAmount;
+      if (tx.type === "EXPENSE" || tx.type === "PAYMENT_SENT")
+        todayExpenses += tx.netAmount;
     });
 
     const todayNetProfit = todaySales - todayExpenses;
@@ -70,7 +77,7 @@ export const ReportService = {
         transactionDate: { gte: date, lt: nextDay },
       },
       include: { party: { select: { name: true } } },
-      orderBy: { transactionDate: 'asc' },
+      orderBy: { transactionDate: "asc" },
     });
 
     let totalSales = 0;
@@ -81,15 +88,28 @@ export const ReportService = {
 
     transactions.forEach((tx) => {
       switch (tx.type) {
-        case "SALE": totalSales += tx.netAmount; break;
-        case "PURCHASE": totalPurchases += tx.netAmount; break;
-        case "EXPENSE": totalExpenses += tx.netAmount; break;
-        case "PAYMENT_RECEIVED": paymentsReceived += tx.netAmount; break;
-        case "PAYMENT_SENT": paymentsSent += tx.netAmount; break;
+        case "SALE":
+          totalSales += tx.netAmount;
+          break;
+        case "PURCHASE":
+          totalPurchases += tx.netAmount;
+          break;
+        case "EXPENSE":
+          totalExpenses += tx.netAmount;
+          break;
+        case "PAYMENT_RECEIVED":
+          paymentsReceived += tx.netAmount;
+          break;
+        case "PAYMENT_SENT":
+          paymentsSent += tx.netAmount;
+          break;
       }
     });
 
-    const netCashFlow = (totalSales + paymentsReceived) - (totalPurchases + totalExpenses + paymentsSent);
+    const netCashFlow =
+      totalSales +
+      paymentsReceived -
+      (totalPurchases + totalExpenses + paymentsSent);
 
     return {
       date: date.toISOString().split("T")[0],
@@ -113,7 +133,7 @@ export const ReportService = {
     // Optimize: fetch exact balance per party (since we don't store it)
     for (const party of parties) {
       const balance = await PartyService.getPartyBalance(party.id, storeId);
-      
+
       // If balance is positive, customer owes us. If negative, we owe them.
       // The prompt says "parties with dueAmount > 0" or "parties who owe us / we owe".
       if (balance !== 0) {
@@ -134,11 +154,15 @@ export const ReportService = {
     return outstandingParties;
   },
 
-  async getStockReport(storeId: string, lowStock?: string, thresholdStr?: string) {
+  async getStockReport(
+    storeId: string,
+    lowStock?: string,
+    thresholdStr?: string,
+  ) {
     const threshold = thresholdStr ? parseInt(thresholdStr, 10) : 10;
-    
+
     const where: any = { storeId };
-    if (lowStock === 'true') {
+    if (lowStock === "true") {
       where.stock = { lt: threshold };
     }
 
@@ -152,7 +176,7 @@ export const ReportService = {
         unit: true,
         price: true,
       },
-      orderBy: { stock: 'asc' },
+      orderBy: { stock: "asc" },
     });
   },
 
@@ -181,12 +205,16 @@ export const ReportService = {
       if (tx.type === "SALE" || tx.type === "PAYMENT_RECEIVED") {
         revenue += tx.netAmount;
       }
-      if (tx.type === "PURCHASE" || tx.type === "EXPENSE" || tx.type === "PAYMENT_SENT") {
+      if (
+        tx.type === "PURCHASE" ||
+        tx.type === "EXPENSE" ||
+        tx.type === "PAYMENT_SENT"
+      ) {
         expenses += tx.netAmount;
       }
-      
+
       if (tx.type === "SALE") {
-        tx.items.forEach(item => {
+        tx.items.forEach((item) => {
           // If purchasePrice is null, default to 0
           const pp = item.product.purchasePrice || 0;
           cogs += item.quantity * pp;
@@ -206,7 +234,12 @@ export const ReportService = {
     };
   },
 
-  async getPartyLedger(storeId: string, partyId: string, from?: string, to?: string) {
+  async getPartyLedger(
+    storeId: string,
+    partyId: string,
+    from?: string,
+    to?: string,
+  ) {
     const party = await prisma.party.findFirst({
       where: { id: partyId, storeId },
       select: { id: true, name: true, openingBalance: true },
@@ -229,9 +262,14 @@ export const ReportService = {
 
       priorTransactions.forEach((tx) => {
         // According to our party balance logic:
-        const amount = tx.type === "PAYMENT_RECEIVED" || tx.type === "PAYMENT_SENT" ? tx.netAmount : tx.dueAmount;
-        if (tx.type === "SALE" || tx.type === "PAYMENT_SENT") runningBalance += amount;
-        else if (tx.type === "PURCHASE" || tx.type === "PAYMENT_RECEIVED") runningBalance -= amount;
+        const amount =
+          tx.type === "PAYMENT_RECEIVED" || tx.type === "PAYMENT_SENT"
+            ? tx.netAmount
+            : tx.dueAmount;
+        if (tx.type === "SALE" || tx.type === "PAYMENT_SENT")
+          runningBalance += amount;
+        else if (tx.type === "PURCHASE" || tx.type === "PAYMENT_RECEIVED")
+          runningBalance -= amount;
       });
     }
 
@@ -239,15 +277,22 @@ export const ReportService = {
       where: {
         storeId,
         partyId,
-        ...(Object.keys(dateFilter).length > 0 ? { transactionDate: dateFilter } : {}),
+        ...(Object.keys(dateFilter).length > 0
+          ? { transactionDate: dateFilter }
+          : {}),
       },
-      orderBy: { transactionDate: 'asc' },
+      orderBy: { transactionDate: "asc" },
     });
 
     const ledger = transactions.map((tx) => {
-      const amount = tx.type === "PAYMENT_RECEIVED" || tx.type === "PAYMENT_SENT" ? tx.netAmount : tx.dueAmount;
-      if (tx.type === "SALE" || tx.type === "PAYMENT_SENT") runningBalance += amount;
-      else if (tx.type === "PURCHASE" || tx.type === "PAYMENT_RECEIVED") runningBalance -= amount;
+      const amount =
+        tx.type === "PAYMENT_RECEIVED" || tx.type === "PAYMENT_SENT"
+          ? tx.netAmount
+          : tx.dueAmount;
+      if (tx.type === "SALE" || tx.type === "PAYMENT_SENT")
+        runningBalance += amount;
+      else if (tx.type === "PURCHASE" || tx.type === "PAYMENT_RECEIVED")
+        runningBalance -= amount;
 
       return {
         id: tx.id,
@@ -267,7 +312,12 @@ export const ReportService = {
     };
   },
 
-  async getSalesReport(storeId: string, from?: string, to?: string, groupBy: 'day' | 'week' | 'month' = 'day') {
+  async getSalesReport(
+    storeId: string,
+    from?: string,
+    to?: string,
+    groupBy: "day" | "week" | "month" = "day",
+  ) {
     const where: any = { storeId, type: "SALE" };
     if (from || to) {
       where.transactionDate = {};
@@ -282,42 +332,59 @@ export const ReportService = {
         netAmount: true,
         items: { select: { quantity: true } },
       },
-      orderBy: { transactionDate: 'asc' },
+      orderBy: { transactionDate: "asc" },
     });
 
-    const groupedData: Record<string, { period: string, totalSales: number, totalItems: number, orderCount: number }> = {};
+    const groupedData: Record<
+      string,
+      {
+        period: string;
+        totalSales: number;
+        totalItems: number;
+        orderCount: number;
+      }
+    > = {};
 
-    transactions.forEach(tx => {
+    transactions.forEach((tx) => {
       const date = tx.transactionDate;
       if (!date) return;
-      let periodKey = '';
+      let periodKey = "";
 
-      if (groupBy === 'day') {
-        periodKey = date.toISOString().split('T')[0]!;
-      } else if (groupBy === 'month') {
-        periodKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
-      } else if (groupBy === 'week') {
+      if (groupBy === "day") {
+        periodKey = date.toISOString().split("T")[0]!;
+      } else if (groupBy === "month") {
+        periodKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}`;
+      } else if (groupBy === "week") {
         // ISO Week logic roughly
-        const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+        const d = new Date(
+          Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()),
+        );
         const dayNum = d.getUTCDay() || 7;
         d.setUTCDate(d.getUTCDate() + 4 - dayNum);
-        const yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
-        const weekNo = Math.ceil((((d.getTime() - yearStart.getTime()) / 86400000) + 1)/7);
-        periodKey = `${d.getUTCFullYear()}-W${String(weekNo).padStart(2, '0')}`;
+        const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+        const weekNo = Math.ceil(
+          ((d.getTime() - yearStart.getTime()) / 86400000 + 1) / 7,
+        );
+        periodKey = `${d.getUTCFullYear()}-W${String(weekNo).padStart(2, "0")}`;
       }
 
       if (!groupedData[periodKey]) {
-        groupedData[periodKey] = { period: periodKey, totalSales: 0, totalItems: 0, orderCount: 0 };
+        groupedData[periodKey] = {
+          period: periodKey,
+          totalSales: 0,
+          totalItems: 0,
+          orderCount: 0,
+        };
       }
 
       groupedData[periodKey]!.totalSales += tx.netAmount;
       groupedData[periodKey]!.orderCount += 1;
-      
+
       const itemsCount = tx.items.reduce((sum, item) => sum + item.quantity, 0);
       groupedData[periodKey]!.totalItems += itemsCount;
     });
 
-    const result = Object.values(groupedData).map(group => ({
+    const result = Object.values(groupedData).map((group) => ({
       ...group,
       averageOrderValue: group.totalSales / group.orderCount,
     }));
