@@ -13,7 +13,7 @@ const startServer = async () => {
 
     // Start Express server
     const port = config.PORT;
-    const server = app.listen(port, () => {
+    const server = app.listen(Number(port), "0.0.0.0", () => {
       console.log(`🚀 Server is running in ${config.NODE_ENV} mode on port ${port}`);
     });
 
