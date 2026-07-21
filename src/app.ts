@@ -66,8 +66,24 @@ import { reportRoutes } from "./modules/report/report.routes.js";
 
 import { categoryRoutes } from "./modules/category/category.routes.js";
 import { configRoutes } from "./modules/config/config.routes.js";
+import { storeRoutes } from "./modules/store/store.routes.js";
+import { brandRoutes } from "./modules/brand/brand.routes.js";
+import { stockRoutes } from "./modules/stock/stock.routes.js";
+import { hrRoutes } from "./modules/hr/hr.routes.js";
+import { financeRoutes } from "./modules/finance/finance.routes.js";
+import { deliveryRoutes } from "./modules/delivery/delivery.routes.js";
+import { userRoutes } from "./modules/user/user.routes.js";
+import { settingsRoutes } from "./modules/settings/settings.routes.js";
 
 // --- Modules Placeholders (Protected + Store Bound) ---
+app.use("/api/stores", requireAuth, storeRoutes);
+app.use("/api/brands", requireAuth, requireStore, brandRoutes);
+app.use("/api/stock", requireAuth, requireStore, stockRoutes);
+app.use("/api", requireAuth, requireStore, hrRoutes);
+app.use("/api", requireAuth, requireStore, financeRoutes);
+app.use("/api", requireAuth, requireStore, deliveryRoutes);
+app.use("/api", requireAuth, requireStore, userRoutes);
+app.use("/api/settings", requireAuth, requireStore, settingsRoutes);
 app.use("/api/categories", requireAuth, requireStore, categoryRoutes);
 app.use("/api/products", requireAuth, requireStore, productRoutes);
 app.use("/api/parties", requireAuth, requireStore, partyRoutes);
