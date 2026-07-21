@@ -1,11 +1,13 @@
 # Zopshop API Documentation
 
 ## 1. Project Overview
+
 **What is Zopshop?**
 Zopshop is a Universal Digital Ledger System and backend SaaS platform.
 **Who is it for?**
 Any business type (grocery, pharmacy, hardware, wholesale, retail, etc.) needing to manage their business operations digitally.
 **Key Features:**
+
 - Digital ledger for tracking daily business transactions
 - Stock management and inventory tracking
 - Credit and due tracking for customers and suppliers
@@ -14,12 +16,14 @@ Any business type (grocery, pharmacy, hardware, wholesale, retail, etc.) needing
 ---
 
 ## 2. Base URL
+
 - **Development:** `http://localhost:8000/api`
 - **Production:** `[your-production-url]/api`
 
 ---
 
 ## 3. Authentication
+
 - **Login Methods:** `better-auth` is used to provide secure Email/Password and Google OAuth login.
 - **Session Management:** Sessions are maintained via secure HTTP-only cookies and/or Bearer tokens.
 - **Protected Endpoints:** All endpoints (except public auth routes) require authentication (`requireAuth` middleware) and store access (`requireStore` middleware).
@@ -29,6 +33,7 @@ Any business type (grocery, pharmacy, hardware, wholesale, retail, etc.) needing
 ## 4. Response Format
 
 ### Success Format:
+
 ```json
 {
   "success": true,
@@ -39,6 +44,7 @@ Any business type (grocery, pharmacy, hardware, wholesale, retail, etc.) needing
 ```
 
 ### Error Format:
+
 ```json
 {
   "success": false,
@@ -49,6 +55,7 @@ Any business type (grocery, pharmacy, hardware, wholesale, retail, etc.) needing
 ```
 
 ### Status Codes:
+
 - `200`: Success
 - `201`: Created
 - `400`: Bad Request
@@ -63,72 +70,80 @@ Any business type (grocery, pharmacy, hardware, wholesale, retail, etc.) needing
 ## 5. Endpoint Documentation
 
 ### Auth (Public / API Provided by better-auth)
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/auth/sign-up` | Register new user |
-| POST | `/auth/sign-in` | Login user |
-| POST | `/auth/sign-out` | Logout user |
-| GET | `/auth/get-session` | Get current session |
-| GET | `/auth/me` | Custom session wrapper |
+
+| Method | Endpoint            | Description            |
+| ------ | ------------------- | ---------------------- |
+| POST   | `/auth/sign-up`     | Register new user      |
+| POST   | `/auth/sign-in`     | Login user             |
+| POST   | `/auth/sign-out`    | Logout user            |
+| GET    | `/auth/get-session` | Get current session    |
+| GET    | `/auth/me`          | Custom session wrapper |
 
 ### Products (Protected)
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/products` | Create product |
-| GET | `/products` | List products |
-| GET | `/products/:id` | Get product |
-| PUT | `/products/:id` | Update product |
-| DELETE | `/products/:id` | Delete product |
-| GET | `/products/category/:id` | Get by category |
-| GET | `/products/search` | Search products |
+
+| Method | Endpoint                 | Description     |
+| ------ | ------------------------ | --------------- |
+| POST   | `/products`              | Create product  |
+| GET    | `/products`              | List products   |
+| GET    | `/products/:id`          | Get product     |
+| PUT    | `/products/:id`          | Update product  |
+| DELETE | `/products/:id`          | Delete product  |
+| GET    | `/products/category/:id` | Get by category |
+| GET    | `/products/search`       | Search products |
 
 ### Parties (Protected)
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/parties` | Create party (Customer/Supplier) |
-| GET | `/parties` | List parties |
-| GET | `/parties/:id` | Get party |
-| PUT | `/parties/:id` | Update party |
-| DELETE | `/parties/:id` | Delete party |
-| GET | `/parties/:id/balance` | Get balance |
-| GET | `/parties/:id/transactions` | Get transactions |
+
+| Method | Endpoint                    | Description                      |
+| ------ | --------------------------- | -------------------------------- |
+| POST   | `/parties`                  | Create party (Customer/Supplier) |
+| GET    | `/parties`                  | List parties                     |
+| GET    | `/parties/:id`              | Get party                        |
+| PUT    | `/parties/:id`              | Update party                     |
+| DELETE | `/parties/:id`              | Delete party                     |
+| GET    | `/parties/:id/balance`      | Get balance                      |
+| GET    | `/parties/:id/transactions` | Get transactions                 |
 
 ### Transactions (Protected)
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/transactions` | Create transaction (Sale/Purchase/Expense) |
-| GET | `/transactions` | List transactions |
-| GET | `/transactions/:id` | Get transaction |
-| PUT | `/transactions/:id` | Update transaction |
-| DELETE | `/transactions/:id` | Delete transaction |
-| GET | `/transactions/daily-summary` | Daily summary |
+
+| Method | Endpoint                      | Description                                |
+| ------ | ----------------------------- | ------------------------------------------ |
+| POST   | `/transactions`               | Create transaction (Sale/Purchase/Expense) |
+| GET    | `/transactions`               | List transactions                          |
+| GET    | `/transactions/:id`           | Get transaction                            |
+| PUT    | `/transactions/:id`           | Update transaction                         |
+| DELETE | `/transactions/:id`           | Delete transaction                         |
+| GET    | `/transactions/daily-summary` | Daily summary                              |
 
 ### Reports (Protected)
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/reports/dashboard` | Dashboard stats |
-| GET | `/reports/daily` | Daily report |
-| GET | `/reports/outstanding` | Outstanding report |
-| GET | `/reports/stock` | Stock report |
-| GET | `/reports/profit-loss` | Profit/Loss |
-| GET | `/reports/party-ledger/:id` | Party ledger |
-| GET | `/reports/sales` | Sales analytics |
+
+| Method | Endpoint                    | Description        |
+| ------ | --------------------------- | ------------------ |
+| GET    | `/reports/dashboard`        | Dashboard stats    |
+| GET    | `/reports/daily`            | Daily report       |
+| GET    | `/reports/outstanding`      | Outstanding report |
+| GET    | `/reports/stock`            | Stock report       |
+| GET    | `/reports/profit-loss`      | Profit/Loss        |
+| GET    | `/reports/party-ledger/:id` | Party ledger       |
+| GET    | `/reports/sales`            | Sales analytics    |
 
 ### Config & Category (Protected)
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/config` | Get config |
-| PUT | `/config` | Update config |
-| GET | `/config/store-info` | Get store info |
-| POST | `/categories` | Create category |
-| GET | `/categories` | List categories |
+
+| Method | Endpoint             | Description     |
+| ------ | -------------------- | --------------- |
+| GET    | `/config`            | Get config      |
+| PUT    | `/config`            | Update config   |
+| GET    | `/config/store-info` | Get store info  |
+| POST   | `/categories`        | Create category |
+| GET    | `/categories`        | List categories |
 
 ---
 
 ## 6. Example Requests & Responses
 
 ### 1. Product Creation
+
 **Request:** `POST /api/products`
+
 ```json
 {
   "name": "Cement Bag",
@@ -139,7 +154,9 @@ Any business type (grocery, pharmacy, hardware, wholesale, retail, etc.) needing
   "stock": 100
 }
 ```
+
 **Response:**
+
 ```json
 {
   "success": true,
@@ -154,7 +171,9 @@ Any business type (grocery, pharmacy, hardware, wholesale, retail, etc.) needing
 ```
 
 ### 2. Transaction Creation (Sale)
+
 **Request:** `POST /api/transactions`
+
 ```json
 {
   "partyId": "party_123",
@@ -171,7 +190,9 @@ Any business type (grocery, pharmacy, hardware, wholesale, retail, etc.) needing
   ]
 }
 ```
+
 **Response:**
+
 ```json
 {
   "success": true,
@@ -186,8 +207,10 @@ Any business type (grocery, pharmacy, hardware, wholesale, retail, etc.) needing
 ```
 
 ### 3. Dashboard Report
+
 **Request:** `GET /api/reports/dashboard`
 **Response:**
+
 ```json
 {
   "success": true,
@@ -205,7 +228,9 @@ Any business type (grocery, pharmacy, hardware, wholesale, retail, etc.) needing
 ---
 
 ## 7. Database Schema
+
 ### Key Relations
+
 - `User` (1) --- (M) `Store`
 - `Store` (1) --- (M) `Product`, `Category`, `Party`, `Transaction`
 - `Product` (M) --- (1) `Category`
@@ -214,6 +239,7 @@ Any business type (grocery, pharmacy, hardware, wholesale, retail, etc.) needing
 - `Transaction` (M) --- (1) `Party`
 
 ### Key Fields:
+
 - **Party Type:** Configures if a party is `CUSTOMER`, `SUPPLIER`, or `BOTH`.
 - **Transaction Type:** `SALE`, `PURCHASE`, `EXPENSE`, `PAYMENT_RECEIVED`, `PAYMENT_SENT`.
 - **Stock:** Maintained on `Product`. Deducted/added based on `TransactionType`.
@@ -221,6 +247,7 @@ Any business type (grocery, pharmacy, hardware, wholesale, retail, etc.) needing
 ---
 
 ## 8. Environment Variables
+
 - `PORT`: Server port (e.g., 8000)
 - `DATABASE_URL`: Connection string for PostgreSQL
 - `BETTER_AUTH_SECRET`: Secret key for better-auth session signing
@@ -234,11 +261,13 @@ Any business type (grocery, pharmacy, hardware, wholesale, retail, etc.) needing
 ## 9. Deployment Guide
 
 ### Vercel (Frontend)
+
 1. Import your frontend repository in Vercel.
 2. Set Environment Variables including `NEXT_PUBLIC_API_URL` pointing to your deployed backend.
 3. Deploy!
 
 ### Render / Railway (Backend)
+
 1. Create a new Web Service from your GitHub repository.
 2. Build Command: `npm run build`
 3. Start Command: `npm run start`
@@ -247,6 +276,7 @@ Any business type (grocery, pharmacy, hardware, wholesale, retail, etc.) needing
 6. Run Migrations: Add `npx prisma db push` to a post-build script or run it manually.
 
 ### Database Migration Steps (Production)
+
 1. Open deployment console / shell.
 2. Run `npx prisma db push` (or `npx prisma migrate deploy` if using migration files).
 3. Optionally seed the database: `npm run prisma:seed`.
@@ -254,6 +284,7 @@ Any business type (grocery, pharmacy, hardware, wholesale, retail, etc.) needing
 ---
 
 ## Checklist Before Deployment
+
 - [x] All routes working
 - [x] Authentication working
 - [x] All CRUD operations working
