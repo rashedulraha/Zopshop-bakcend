@@ -76,6 +76,9 @@ import { userRoutes } from "./modules/user/user.routes.js";
 import { settingsRoutes } from "./modules/settings/settings.routes.js";
 import { adminRoutes } from "./modules/admin/admin.routes.js";
 
+// --- Super Admin Routes (must be BEFORE generic /api routes) ---
+app.use("/api/admin", adminRoutes);
+
 // --- Modules Placeholders (Protected + Store Bound) ---
 app.use("/api/stores", requireAuth, storeRoutes);
 app.use("/api/brands", requireAuth, requireStore, brandRoutes);
@@ -91,7 +94,6 @@ app.use("/api/parties", requireAuth, requireStore, partyRoutes);
 app.use("/api/transactions", requireAuth, requireStore, transactionRoutes);
 app.use("/api/reports", requireAuth, requireStore, reportRoutes);
 app.use("/api/config", requireAuth, requireStore, configRoutes);
-app.use("/api/admin", adminRoutes);
 
 // =======================
 // Error Handling

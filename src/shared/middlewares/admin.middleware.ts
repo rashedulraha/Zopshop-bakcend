@@ -17,10 +17,10 @@ export const requireSuperAdmin = async (
 
     const dbUser = await prisma.user.findUnique({
       where: { id: req.user.id },
-      select: { isSuperAdmin: true },
+      select: { isSuperAdmin: true, role: true },
     });
 
-    if (!dbUser || !dbUser.isSuperAdmin) {
+    if (!dbUser || (!dbUser.isSuperAdmin && dbUser.role !== "SUPERADMIN")) {
       return res.status(403).json({
         success: false,
         message: "Forbidden - Requires Super Admin privileges",
