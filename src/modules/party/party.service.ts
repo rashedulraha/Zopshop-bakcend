@@ -205,4 +205,64 @@ export const PartyService = {
       },
     };
   },
+
+  async getPartyLedger(id: string, storeId: string) {
+    const party = await prisma.party.findFirst({
+      where: { id, storeId },
+    });
+
+    if (!party) {
+      throw new Error("Party not found");
+    }
+
+    const transactions = await prisma.transaction.findMany({
+      where: { partyId: id, storeId },
+      orderBy: { transactionDate: "asc" },
+    });
+
+    let currentBalance = party.openingBalance;
+    
+    const ledger = transactions.map((tx) => {
+      // Logic from getPartyBalance:
+      // SALE/PAYMENT_SENT increases balance (party owes us)
+      // PURCHASE/PAYMENT_RECEIVED decreases balance (we owe party)
+      let debit = 0;
+      let credit = 0;
+
+      if (tx.type === "SALE" || tx.type === "PAYMENT_SENT") {
+        debit = tx.dueAmount;
+        currentBalance += tx.dueAmount;
+      } else if (tx.type === "PURCHASE" || tx.type === "PAYMENT_RECEIVED" || tx.type === "SALE_RETURN") {
+        credit = tx.dueAmount;
+        currentBalance -= tx.dueAmount;
+      }
+
+      return {
+        ...tx,
+        debit,
+        credit,
+        runningBalance: currentBalance,
+      };
+    });
+
+    return {
+      party,
+      ledger,
+    };
+  },
+
+  async getPartiesWithDue(storeId: string) {
+    const parties = await prisma.party.findMany({
+      where: { storeId },
+    });
+
+    const partiesWithBalance = await Promise.all(
+      parties.map(async (party) => {
+        const balance = await this.getPartyBalance(party.id, storeId);
+        return { ...party, balance };
+      })
+    );
+
+    return partiesWithBalance.filter(p => p.balance !== 0);
+  }
 };
