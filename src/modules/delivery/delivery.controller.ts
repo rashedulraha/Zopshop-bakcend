@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from "express";
 import { DeliveryService } from "./delivery.service.js";
 import type { ApiResponse } from "../../shared/types/index.js";
-import type { DeliveryStatus } from "../../../generated/prisma/client.js";
+import type { DeliveryStatus } from "../../generated/prisma/client.js";
 
 export const DeliveryController = {
   async getAllDeliveries(req: Request, res: Response<ApiResponse>, next: NextFunction) {

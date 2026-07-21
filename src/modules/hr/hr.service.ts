@@ -1,6 +1,6 @@
 import { prisma } from "../../lib/prisma.js";
 import { TransactionService } from "../transaction/transaction.service.js";
-import type { AttendanceStatus } from "../../../generated/prisma/client.js";
+import type { AttendanceStatus } from "../../generated/prisma/client.js";
 import {
   TransactionType,
   TransactionMode,

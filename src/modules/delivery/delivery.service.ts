@@ -1,5 +1,5 @@
 import { prisma } from "../../lib/prisma.js";
-import type { DeliveryStatus } from "../../../generated/prisma/client.js";
+import type { DeliveryStatus } from "../../generated/prisma/client.js";
 
 export const DeliveryService = {
   async getAllDeliveries(storeId: string, status?: DeliveryStatus) {
