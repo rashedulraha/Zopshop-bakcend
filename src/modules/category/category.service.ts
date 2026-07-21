@@ -19,7 +19,7 @@ export const CategoryService = {
         },
       });
     } catch (error: any) {
-      if (error.code === 'P2002') {
+      if (error.code === "P2002") {
         throw new Error("Category with this name already exists in your store");
       }
       throw error;
@@ -34,7 +34,7 @@ export const CategoryService = {
           select: { products: true },
         },
       },
-      orderBy: { name: 'asc' },
+      orderBy: { name: "asc" },
     });
   },
 
@@ -50,7 +50,9 @@ export const CategoryService = {
   },
 
   async updateCategory(id: string, storeId: string, data: UpdateCategoryDTO) {
-    const category = await prisma.category.findFirst({ where: { id, storeId } });
+    const category = await prisma.category.findFirst({
+      where: { id, storeId },
+    });
 
     if (!category) return null;
 
@@ -60,7 +62,7 @@ export const CategoryService = {
         data,
       });
     } catch (error: any) {
-      if (error.code === 'P2002') {
+      if (error.code === "P2002") {
         throw new Error("Category with this name already exists in your store");
       }
       throw error;
@@ -82,7 +84,9 @@ export const CategoryService = {
     }
 
     if (category._count.products > 0) {
-      throw new Error("Cannot delete category because it has associated products");
+      throw new Error(
+        "Cannot delete category because it has associated products",
+      );
     }
 
     await prisma.category.delete({
