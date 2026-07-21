@@ -14,7 +14,9 @@ export type PartyTypeEnum = (typeof PartyType)[keyof typeof PartyType];
 
 export const TransactionType = {
   SALE: "SALE",
+  SALE_RETURN: "SALE_RETURN",
   PURCHASE: "PURCHASE",
+  PURCHASE_RETURN: "PURCHASE_RETURN",
   EXPENSE: "EXPENSE",
   PAYMENT_RECEIVED: "PAYMENT_RECEIVED",
   PAYMENT_SENT: "PAYMENT_SENT",
