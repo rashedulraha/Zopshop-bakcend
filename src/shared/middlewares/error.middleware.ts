@@ -20,7 +20,11 @@ export const errorHandler = (
     errors = err.flatten().fieldErrors;
   }
   // Basic check for Prisma errors
-  else if (err?.code && typeof err.code === "string" && err.code.startsWith("P2")) {
+  else if (
+    err?.code &&
+    typeof err.code === "string" &&
+    err.code.startsWith("P2")
+  ) {
     statusCode = 400;
     message = "Database Error";
     if (err.code === "P2002") {
@@ -46,10 +50,7 @@ export const errorHandler = (
 };
 
 // 404 Not Found Handler
-export const notFoundHandler = (
-  req: Request,
-  res: Response<ApiResponse>,
-) => {
+export const notFoundHandler = (req: Request, res: Response<ApiResponse>) => {
   res.status(404).json({
     success: false,
     message: `Route ${req.method} ${req.originalUrl} not found`,
