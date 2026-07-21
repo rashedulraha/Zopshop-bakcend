@@ -4,11 +4,7 @@ import type { ApiResponse } from "../types/index.js";
 
 export const validateRequest =
   (schema: ZodSchema) =>
-  async (
-    req: Request,
-    res: Response<ApiResponse>,
-    next: NextFunction,
-  ) => {
+  async (req: Request, res: Response<ApiResponse>, next: NextFunction) => {
     try {
       await schema.parseAsync({
         body: req.body,
