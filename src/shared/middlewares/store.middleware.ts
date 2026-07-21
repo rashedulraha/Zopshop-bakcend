@@ -1,7 +1,8 @@
 import type { NextFunction, Request, Response } from "express";
 import type { ApiResponse } from "../types/index.js";
+import { prisma } from "../../lib/prisma.js";
 
-export const requireStore = (
+export const requireStore = async (
   req: Request,
   res: Response<ApiResponse>,
   next: NextFunction,
@@ -15,7 +16,15 @@ export const requireStore = (
       });
     }
 
-    const storeId = req.user.storeId;
+    const headerStoreId = req.headers["x-store-id"] as string;
+
+    // Fetch fresh user from DB to get the latest storeId (session might be stale)
+    const freshUser = await prisma.user.findUnique({
+      where: { id: req.user.id },
+      select: { storeId: true },
+    });
+
+    const storeId = freshUser?.storeId || req.user.storeId || headerStoreId;
 
     if (!storeId) {
       return res.status(403).json({
