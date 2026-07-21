@@ -61,7 +61,15 @@ export const ModelName = {
   Party: 'Party',
   Transaction: 'Transaction',
   TransactionItem: 'TransactionItem',
-  Config: 'Config'
+  Config: 'Config',
+  Brand: 'Brand',
+  BankAccount: 'BankAccount',
+  Employee: 'Employee',
+  Attendance: 'Attendance',
+  Vehicle: 'Vehicle',
+  Delivery: 'Delivery',
+  Role: 'Role',
+  Permission: 'Permission'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -166,11 +174,13 @@ export const ProductScalarFieldEnum = {
   id: 'id',
   name: 'name',
   categoryId: 'categoryId',
+  brandId: 'brandId',
   storeId: 'storeId',
   unit: 'unit',
   price: 'price',
   purchasePrice: 'purchasePrice',
   stock: 'stock',
+  minStock: 'minStock',
   sku: 'sku',
   barcode: 'barcode',
   attributes: 'attributes',
@@ -203,6 +213,7 @@ export const TransactionScalarFieldEnum = {
   invoiceNo: 'invoiceNo',
   storeId: 'storeId',
   partyId: 'partyId',
+  bankAccountId: 'bankAccountId',
   type: 'type',
   mode: 'mode',
   amount: 'amount',
@@ -252,6 +263,113 @@ export const ConfigScalarFieldEnum = {
 } as const
 
 export type ConfigScalarFieldEnum = (typeof ConfigScalarFieldEnum)[keyof typeof ConfigScalarFieldEnum]
+
+
+export const BrandScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  storeId: 'storeId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BrandScalarFieldEnum = (typeof BrandScalarFieldEnum)[keyof typeof BrandScalarFieldEnum]
+
+
+export const BankAccountScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  accountNumber: 'accountNumber',
+  bankName: 'bankName',
+  branch: 'branch',
+  balance: 'balance',
+  storeId: 'storeId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BankAccountScalarFieldEnum = (typeof BankAccountScalarFieldEnum)[keyof typeof BankAccountScalarFieldEnum]
+
+
+export const EmployeeScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  mobile: 'mobile',
+  email: 'email',
+  address: 'address',
+  position: 'position',
+  salary: 'salary',
+  storeId: 'storeId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EmployeeScalarFieldEnum = (typeof EmployeeScalarFieldEnum)[keyof typeof EmployeeScalarFieldEnum]
+
+
+export const AttendanceScalarFieldEnum = {
+  id: 'id',
+  employeeId: 'employeeId',
+  date: 'date',
+  status: 'status',
+  note: 'note',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AttendanceScalarFieldEnum = (typeof AttendanceScalarFieldEnum)[keyof typeof AttendanceScalarFieldEnum]
+
+
+export const VehicleScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  plateNumber: 'plateNumber',
+  type: 'type',
+  storeId: 'storeId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type VehicleScalarFieldEnum = (typeof VehicleScalarFieldEnum)[keyof typeof VehicleScalarFieldEnum]
+
+
+export const DeliveryScalarFieldEnum = {
+  id: 'id',
+  transactionId: 'transactionId',
+  vehicleId: 'vehicleId',
+  driverName: 'driverName',
+  driverMobile: 'driverMobile',
+  status: 'status',
+  storeId: 'storeId',
+  address: 'address',
+  note: 'note',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DeliveryScalarFieldEnum = (typeof DeliveryScalarFieldEnum)[keyof typeof DeliveryScalarFieldEnum]
+
+
+export const RoleScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  storeId: 'storeId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RoleScalarFieldEnum = (typeof RoleScalarFieldEnum)[keyof typeof RoleScalarFieldEnum]
+
+
+export const PermissionScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PermissionScalarFieldEnum = (typeof PermissionScalarFieldEnum)[keyof typeof PermissionScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -187,6 +187,12 @@ export type StoreWhereInput = {
   products?: Prisma.ProductListRelationFilter
   parties?: Prisma.PartyListRelationFilter
   transactions?: Prisma.TransactionListRelationFilter
+  brands?: Prisma.BrandListRelationFilter
+  employees?: Prisma.EmployeeListRelationFilter
+  accounts?: Prisma.BankAccountListRelationFilter
+  deliveries?: Prisma.DeliveryListRelationFilter
+  vehicles?: Prisma.VehicleListRelationFilter
+  roles?: Prisma.RoleListRelationFilter
   config?: Prisma.XOR<Prisma.ConfigNullableScalarRelationFilter, Prisma.ConfigWhereInput> | null
 }
 
@@ -201,6 +207,12 @@ export type StoreOrderByWithRelationInput = {
   products?: Prisma.ProductOrderByRelationAggregateInput
   parties?: Prisma.PartyOrderByRelationAggregateInput
   transactions?: Prisma.TransactionOrderByRelationAggregateInput
+  brands?: Prisma.BrandOrderByRelationAggregateInput
+  employees?: Prisma.EmployeeOrderByRelationAggregateInput
+  accounts?: Prisma.BankAccountOrderByRelationAggregateInput
+  deliveries?: Prisma.DeliveryOrderByRelationAggregateInput
+  vehicles?: Prisma.VehicleOrderByRelationAggregateInput
+  roles?: Prisma.RoleOrderByRelationAggregateInput
   config?: Prisma.ConfigOrderByWithRelationInput
 }
 
@@ -218,6 +230,12 @@ export type StoreWhereUniqueInput = Prisma.AtLeast<{
   products?: Prisma.ProductListRelationFilter
   parties?: Prisma.PartyListRelationFilter
   transactions?: Prisma.TransactionListRelationFilter
+  brands?: Prisma.BrandListRelationFilter
+  employees?: Prisma.EmployeeListRelationFilter
+  accounts?: Prisma.BankAccountListRelationFilter
+  deliveries?: Prisma.DeliveryListRelationFilter
+  vehicles?: Prisma.VehicleListRelationFilter
+  roles?: Prisma.RoleListRelationFilter
   config?: Prisma.XOR<Prisma.ConfigNullableScalarRelationFilter, Prisma.ConfigWhereInput> | null
 }, "id">
 
@@ -254,6 +272,12 @@ export type StoreCreateInput = {
   products?: Prisma.ProductCreateNestedManyWithoutStoreInput
   parties?: Prisma.PartyCreateNestedManyWithoutStoreInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutStoreInput
+  brands?: Prisma.BrandCreateNestedManyWithoutStoreInput
+  employees?: Prisma.EmployeeCreateNestedManyWithoutStoreInput
+  accounts?: Prisma.BankAccountCreateNestedManyWithoutStoreInput
+  deliveries?: Prisma.DeliveryCreateNestedManyWithoutStoreInput
+  vehicles?: Prisma.VehicleCreateNestedManyWithoutStoreInput
+  roles?: Prisma.RoleCreateNestedManyWithoutStoreInput
   config?: Prisma.ConfigCreateNestedOneWithoutStoreInput
 }
 
@@ -268,6 +292,12 @@ export type StoreUncheckedCreateInput = {
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutStoreInput
   parties?: Prisma.PartyUncheckedCreateNestedManyWithoutStoreInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutStoreInput
+  brands?: Prisma.BrandUncheckedCreateNestedManyWithoutStoreInput
+  employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutStoreInput
+  accounts?: Prisma.BankAccountUncheckedCreateNestedManyWithoutStoreInput
+  deliveries?: Prisma.DeliveryUncheckedCreateNestedManyWithoutStoreInput
+  vehicles?: Prisma.VehicleUncheckedCreateNestedManyWithoutStoreInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutStoreInput
   config?: Prisma.ConfigUncheckedCreateNestedOneWithoutStoreInput
 }
 
@@ -282,6 +312,12 @@ export type StoreUpdateInput = {
   products?: Prisma.ProductUpdateManyWithoutStoreNestedInput
   parties?: Prisma.PartyUpdateManyWithoutStoreNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutStoreNestedInput
+  brands?: Prisma.BrandUpdateManyWithoutStoreNestedInput
+  employees?: Prisma.EmployeeUpdateManyWithoutStoreNestedInput
+  accounts?: Prisma.BankAccountUpdateManyWithoutStoreNestedInput
+  deliveries?: Prisma.DeliveryUpdateManyWithoutStoreNestedInput
+  vehicles?: Prisma.VehicleUpdateManyWithoutStoreNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutStoreNestedInput
   config?: Prisma.ConfigUpdateOneWithoutStoreNestedInput
 }
 
@@ -296,6 +332,12 @@ export type StoreUncheckedUpdateInput = {
   products?: Prisma.ProductUncheckedUpdateManyWithoutStoreNestedInput
   parties?: Prisma.PartyUncheckedUpdateManyWithoutStoreNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutStoreNestedInput
+  brands?: Prisma.BrandUncheckedUpdateManyWithoutStoreNestedInput
+  employees?: Prisma.EmployeeUncheckedUpdateManyWithoutStoreNestedInput
+  accounts?: Prisma.BankAccountUncheckedUpdateManyWithoutStoreNestedInput
+  deliveries?: Prisma.DeliveryUncheckedUpdateManyWithoutStoreNestedInput
+  vehicles?: Prisma.VehicleUncheckedUpdateManyWithoutStoreNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutStoreNestedInput
   config?: Prisma.ConfigUncheckedUpdateOneWithoutStoreNestedInput
 }
 
@@ -443,6 +485,90 @@ export type StoreUpdateOneRequiredWithoutConfigNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.StoreUpdateToOneWithWhereWithoutConfigInput, Prisma.StoreUpdateWithoutConfigInput>, Prisma.StoreUncheckedUpdateWithoutConfigInput>
 }
 
+export type StoreCreateNestedOneWithoutBrandsInput = {
+  create?: Prisma.XOR<Prisma.StoreCreateWithoutBrandsInput, Prisma.StoreUncheckedCreateWithoutBrandsInput>
+  connectOrCreate?: Prisma.StoreCreateOrConnectWithoutBrandsInput
+  connect?: Prisma.StoreWhereUniqueInput
+}
+
+export type StoreUpdateOneRequiredWithoutBrandsNestedInput = {
+  create?: Prisma.XOR<Prisma.StoreCreateWithoutBrandsInput, Prisma.StoreUncheckedCreateWithoutBrandsInput>
+  connectOrCreate?: Prisma.StoreCreateOrConnectWithoutBrandsInput
+  upsert?: Prisma.StoreUpsertWithoutBrandsInput
+  connect?: Prisma.StoreWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.StoreUpdateToOneWithWhereWithoutBrandsInput, Prisma.StoreUpdateWithoutBrandsInput>, Prisma.StoreUncheckedUpdateWithoutBrandsInput>
+}
+
+export type StoreCreateNestedOneWithoutAccountsInput = {
+  create?: Prisma.XOR<Prisma.StoreCreateWithoutAccountsInput, Prisma.StoreUncheckedCreateWithoutAccountsInput>
+  connectOrCreate?: Prisma.StoreCreateOrConnectWithoutAccountsInput
+  connect?: Prisma.StoreWhereUniqueInput
+}
+
+export type StoreUpdateOneRequiredWithoutAccountsNestedInput = {
+  create?: Prisma.XOR<Prisma.StoreCreateWithoutAccountsInput, Prisma.StoreUncheckedCreateWithoutAccountsInput>
+  connectOrCreate?: Prisma.StoreCreateOrConnectWithoutAccountsInput
+  upsert?: Prisma.StoreUpsertWithoutAccountsInput
+  connect?: Prisma.StoreWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.StoreUpdateToOneWithWhereWithoutAccountsInput, Prisma.StoreUpdateWithoutAccountsInput>, Prisma.StoreUncheckedUpdateWithoutAccountsInput>
+}
+
+export type StoreCreateNestedOneWithoutEmployeesInput = {
+  create?: Prisma.XOR<Prisma.StoreCreateWithoutEmployeesInput, Prisma.StoreUncheckedCreateWithoutEmployeesInput>
+  connectOrCreate?: Prisma.StoreCreateOrConnectWithoutEmployeesInput
+  connect?: Prisma.StoreWhereUniqueInput
+}
+
+export type StoreUpdateOneRequiredWithoutEmployeesNestedInput = {
+  create?: Prisma.XOR<Prisma.StoreCreateWithoutEmployeesInput, Prisma.StoreUncheckedCreateWithoutEmployeesInput>
+  connectOrCreate?: Prisma.StoreCreateOrConnectWithoutEmployeesInput
+  upsert?: Prisma.StoreUpsertWithoutEmployeesInput
+  connect?: Prisma.StoreWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.StoreUpdateToOneWithWhereWithoutEmployeesInput, Prisma.StoreUpdateWithoutEmployeesInput>, Prisma.StoreUncheckedUpdateWithoutEmployeesInput>
+}
+
+export type StoreCreateNestedOneWithoutVehiclesInput = {
+  create?: Prisma.XOR<Prisma.StoreCreateWithoutVehiclesInput, Prisma.StoreUncheckedCreateWithoutVehiclesInput>
+  connectOrCreate?: Prisma.StoreCreateOrConnectWithoutVehiclesInput
+  connect?: Prisma.StoreWhereUniqueInput
+}
+
+export type StoreUpdateOneRequiredWithoutVehiclesNestedInput = {
+  create?: Prisma.XOR<Prisma.StoreCreateWithoutVehiclesInput, Prisma.StoreUncheckedCreateWithoutVehiclesInput>
+  connectOrCreate?: Prisma.StoreCreateOrConnectWithoutVehiclesInput
+  upsert?: Prisma.StoreUpsertWithoutVehiclesInput
+  connect?: Prisma.StoreWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.StoreUpdateToOneWithWhereWithoutVehiclesInput, Prisma.StoreUpdateWithoutVehiclesInput>, Prisma.StoreUncheckedUpdateWithoutVehiclesInput>
+}
+
+export type StoreCreateNestedOneWithoutDeliveriesInput = {
+  create?: Prisma.XOR<Prisma.StoreCreateWithoutDeliveriesInput, Prisma.StoreUncheckedCreateWithoutDeliveriesInput>
+  connectOrCreate?: Prisma.StoreCreateOrConnectWithoutDeliveriesInput
+  connect?: Prisma.StoreWhereUniqueInput
+}
+
+export type StoreUpdateOneRequiredWithoutDeliveriesNestedInput = {
+  create?: Prisma.XOR<Prisma.StoreCreateWithoutDeliveriesInput, Prisma.StoreUncheckedCreateWithoutDeliveriesInput>
+  connectOrCreate?: Prisma.StoreCreateOrConnectWithoutDeliveriesInput
+  upsert?: Prisma.StoreUpsertWithoutDeliveriesInput
+  connect?: Prisma.StoreWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.StoreUpdateToOneWithWhereWithoutDeliveriesInput, Prisma.StoreUpdateWithoutDeliveriesInput>, Prisma.StoreUncheckedUpdateWithoutDeliveriesInput>
+}
+
+export type StoreCreateNestedOneWithoutRolesInput = {
+  create?: Prisma.XOR<Prisma.StoreCreateWithoutRolesInput, Prisma.StoreUncheckedCreateWithoutRolesInput>
+  connectOrCreate?: Prisma.StoreCreateOrConnectWithoutRolesInput
+  connect?: Prisma.StoreWhereUniqueInput
+}
+
+export type StoreUpdateOneRequiredWithoutRolesNestedInput = {
+  create?: Prisma.XOR<Prisma.StoreCreateWithoutRolesInput, Prisma.StoreUncheckedCreateWithoutRolesInput>
+  connectOrCreate?: Prisma.StoreCreateOrConnectWithoutRolesInput
+  upsert?: Prisma.StoreUpsertWithoutRolesInput
+  connect?: Prisma.StoreWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.StoreUpdateToOneWithWhereWithoutRolesInput, Prisma.StoreUpdateWithoutRolesInput>, Prisma.StoreUncheckedUpdateWithoutRolesInput>
+}
+
 export type StoreCreateWithoutUsersInput = {
   id?: string
   name: string
@@ -453,6 +579,12 @@ export type StoreCreateWithoutUsersInput = {
   products?: Prisma.ProductCreateNestedManyWithoutStoreInput
   parties?: Prisma.PartyCreateNestedManyWithoutStoreInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutStoreInput
+  brands?: Prisma.BrandCreateNestedManyWithoutStoreInput
+  employees?: Prisma.EmployeeCreateNestedManyWithoutStoreInput
+  accounts?: Prisma.BankAccountCreateNestedManyWithoutStoreInput
+  deliveries?: Prisma.DeliveryCreateNestedManyWithoutStoreInput
+  vehicles?: Prisma.VehicleCreateNestedManyWithoutStoreInput
+  roles?: Prisma.RoleCreateNestedManyWithoutStoreInput
   config?: Prisma.ConfigCreateNestedOneWithoutStoreInput
 }
 
@@ -466,6 +598,12 @@ export type StoreUncheckedCreateWithoutUsersInput = {
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutStoreInput
   parties?: Prisma.PartyUncheckedCreateNestedManyWithoutStoreInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutStoreInput
+  brands?: Prisma.BrandUncheckedCreateNestedManyWithoutStoreInput
+  employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutStoreInput
+  accounts?: Prisma.BankAccountUncheckedCreateNestedManyWithoutStoreInput
+  deliveries?: Prisma.DeliveryUncheckedCreateNestedManyWithoutStoreInput
+  vehicles?: Prisma.VehicleUncheckedCreateNestedManyWithoutStoreInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutStoreInput
   config?: Prisma.ConfigUncheckedCreateNestedOneWithoutStoreInput
 }
 
@@ -495,6 +633,12 @@ export type StoreUpdateWithoutUsersInput = {
   products?: Prisma.ProductUpdateManyWithoutStoreNestedInput
   parties?: Prisma.PartyUpdateManyWithoutStoreNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutStoreNestedInput
+  brands?: Prisma.BrandUpdateManyWithoutStoreNestedInput
+  employees?: Prisma.EmployeeUpdateManyWithoutStoreNestedInput
+  accounts?: Prisma.BankAccountUpdateManyWithoutStoreNestedInput
+  deliveries?: Prisma.DeliveryUpdateManyWithoutStoreNestedInput
+  vehicles?: Prisma.VehicleUpdateManyWithoutStoreNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutStoreNestedInput
   config?: Prisma.ConfigUpdateOneWithoutStoreNestedInput
 }
 
@@ -508,6 +652,12 @@ export type StoreUncheckedUpdateWithoutUsersInput = {
   products?: Prisma.ProductUncheckedUpdateManyWithoutStoreNestedInput
   parties?: Prisma.PartyUncheckedUpdateManyWithoutStoreNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutStoreNestedInput
+  brands?: Prisma.BrandUncheckedUpdateManyWithoutStoreNestedInput
+  employees?: Prisma.EmployeeUncheckedUpdateManyWithoutStoreNestedInput
+  accounts?: Prisma.BankAccountUncheckedUpdateManyWithoutStoreNestedInput
+  deliveries?: Prisma.DeliveryUncheckedUpdateManyWithoutStoreNestedInput
+  vehicles?: Prisma.VehicleUncheckedUpdateManyWithoutStoreNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutStoreNestedInput
   config?: Prisma.ConfigUncheckedUpdateOneWithoutStoreNestedInput
 }
 
@@ -521,6 +671,12 @@ export type StoreCreateWithoutCategoriesInput = {
   products?: Prisma.ProductCreateNestedManyWithoutStoreInput
   parties?: Prisma.PartyCreateNestedManyWithoutStoreInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutStoreInput
+  brands?: Prisma.BrandCreateNestedManyWithoutStoreInput
+  employees?: Prisma.EmployeeCreateNestedManyWithoutStoreInput
+  accounts?: Prisma.BankAccountCreateNestedManyWithoutStoreInput
+  deliveries?: Prisma.DeliveryCreateNestedManyWithoutStoreInput
+  vehicles?: Prisma.VehicleCreateNestedManyWithoutStoreInput
+  roles?: Prisma.RoleCreateNestedManyWithoutStoreInput
   config?: Prisma.ConfigCreateNestedOneWithoutStoreInput
 }
 
@@ -534,6 +690,12 @@ export type StoreUncheckedCreateWithoutCategoriesInput = {
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutStoreInput
   parties?: Prisma.PartyUncheckedCreateNestedManyWithoutStoreInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutStoreInput
+  brands?: Prisma.BrandUncheckedCreateNestedManyWithoutStoreInput
+  employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutStoreInput
+  accounts?: Prisma.BankAccountUncheckedCreateNestedManyWithoutStoreInput
+  deliveries?: Prisma.DeliveryUncheckedCreateNestedManyWithoutStoreInput
+  vehicles?: Prisma.VehicleUncheckedCreateNestedManyWithoutStoreInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutStoreInput
   config?: Prisma.ConfigUncheckedCreateNestedOneWithoutStoreInput
 }
 
@@ -563,6 +725,12 @@ export type StoreUpdateWithoutCategoriesInput = {
   products?: Prisma.ProductUpdateManyWithoutStoreNestedInput
   parties?: Prisma.PartyUpdateManyWithoutStoreNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutStoreNestedInput
+  brands?: Prisma.BrandUpdateManyWithoutStoreNestedInput
+  employees?: Prisma.EmployeeUpdateManyWithoutStoreNestedInput
+  accounts?: Prisma.BankAccountUpdateManyWithoutStoreNestedInput
+  deliveries?: Prisma.DeliveryUpdateManyWithoutStoreNestedInput
+  vehicles?: Prisma.VehicleUpdateManyWithoutStoreNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutStoreNestedInput
   config?: Prisma.ConfigUpdateOneWithoutStoreNestedInput
 }
 
@@ -576,6 +744,12 @@ export type StoreUncheckedUpdateWithoutCategoriesInput = {
   products?: Prisma.ProductUncheckedUpdateManyWithoutStoreNestedInput
   parties?: Prisma.PartyUncheckedUpdateManyWithoutStoreNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutStoreNestedInput
+  brands?: Prisma.BrandUncheckedUpdateManyWithoutStoreNestedInput
+  employees?: Prisma.EmployeeUncheckedUpdateManyWithoutStoreNestedInput
+  accounts?: Prisma.BankAccountUncheckedUpdateManyWithoutStoreNestedInput
+  deliveries?: Prisma.DeliveryUncheckedUpdateManyWithoutStoreNestedInput
+  vehicles?: Prisma.VehicleUncheckedUpdateManyWithoutStoreNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutStoreNestedInput
   config?: Prisma.ConfigUncheckedUpdateOneWithoutStoreNestedInput
 }
 
@@ -589,6 +763,12 @@ export type StoreCreateWithoutProductsInput = {
   categories?: Prisma.CategoryCreateNestedManyWithoutStoreInput
   parties?: Prisma.PartyCreateNestedManyWithoutStoreInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutStoreInput
+  brands?: Prisma.BrandCreateNestedManyWithoutStoreInput
+  employees?: Prisma.EmployeeCreateNestedManyWithoutStoreInput
+  accounts?: Prisma.BankAccountCreateNestedManyWithoutStoreInput
+  deliveries?: Prisma.DeliveryCreateNestedManyWithoutStoreInput
+  vehicles?: Prisma.VehicleCreateNestedManyWithoutStoreInput
+  roles?: Prisma.RoleCreateNestedManyWithoutStoreInput
   config?: Prisma.ConfigCreateNestedOneWithoutStoreInput
 }
 
@@ -602,6 +782,12 @@ export type StoreUncheckedCreateWithoutProductsInput = {
   categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutStoreInput
   parties?: Prisma.PartyUncheckedCreateNestedManyWithoutStoreInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutStoreInput
+  brands?: Prisma.BrandUncheckedCreateNestedManyWithoutStoreInput
+  employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutStoreInput
+  accounts?: Prisma.BankAccountUncheckedCreateNestedManyWithoutStoreInput
+  deliveries?: Prisma.DeliveryUncheckedCreateNestedManyWithoutStoreInput
+  vehicles?: Prisma.VehicleUncheckedCreateNestedManyWithoutStoreInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutStoreInput
   config?: Prisma.ConfigUncheckedCreateNestedOneWithoutStoreInput
 }
 
@@ -631,6 +817,12 @@ export type StoreUpdateWithoutProductsInput = {
   categories?: Prisma.CategoryUpdateManyWithoutStoreNestedInput
   parties?: Prisma.PartyUpdateManyWithoutStoreNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutStoreNestedInput
+  brands?: Prisma.BrandUpdateManyWithoutStoreNestedInput
+  employees?: Prisma.EmployeeUpdateManyWithoutStoreNestedInput
+  accounts?: Prisma.BankAccountUpdateManyWithoutStoreNestedInput
+  deliveries?: Prisma.DeliveryUpdateManyWithoutStoreNestedInput
+  vehicles?: Prisma.VehicleUpdateManyWithoutStoreNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutStoreNestedInput
   config?: Prisma.ConfigUpdateOneWithoutStoreNestedInput
 }
 
@@ -644,6 +836,12 @@ export type StoreUncheckedUpdateWithoutProductsInput = {
   categories?: Prisma.CategoryUncheckedUpdateManyWithoutStoreNestedInput
   parties?: Prisma.PartyUncheckedUpdateManyWithoutStoreNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutStoreNestedInput
+  brands?: Prisma.BrandUncheckedUpdateManyWithoutStoreNestedInput
+  employees?: Prisma.EmployeeUncheckedUpdateManyWithoutStoreNestedInput
+  accounts?: Prisma.BankAccountUncheckedUpdateManyWithoutStoreNestedInput
+  deliveries?: Prisma.DeliveryUncheckedUpdateManyWithoutStoreNestedInput
+  vehicles?: Prisma.VehicleUncheckedUpdateManyWithoutStoreNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutStoreNestedInput
   config?: Prisma.ConfigUncheckedUpdateOneWithoutStoreNestedInput
 }
 
@@ -657,6 +855,12 @@ export type StoreCreateWithoutPartiesInput = {
   categories?: Prisma.CategoryCreateNestedManyWithoutStoreInput
   products?: Prisma.ProductCreateNestedManyWithoutStoreInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutStoreInput
+  brands?: Prisma.BrandCreateNestedManyWithoutStoreInput
+  employees?: Prisma.EmployeeCreateNestedManyWithoutStoreInput
+  accounts?: Prisma.BankAccountCreateNestedManyWithoutStoreInput
+  deliveries?: Prisma.DeliveryCreateNestedManyWithoutStoreInput
+  vehicles?: Prisma.VehicleCreateNestedManyWithoutStoreInput
+  roles?: Prisma.RoleCreateNestedManyWithoutStoreInput
   config?: Prisma.ConfigCreateNestedOneWithoutStoreInput
 }
 
@@ -670,6 +874,12 @@ export type StoreUncheckedCreateWithoutPartiesInput = {
   categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutStoreInput
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutStoreInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutStoreInput
+  brands?: Prisma.BrandUncheckedCreateNestedManyWithoutStoreInput
+  employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutStoreInput
+  accounts?: Prisma.BankAccountUncheckedCreateNestedManyWithoutStoreInput
+  deliveries?: Prisma.DeliveryUncheckedCreateNestedManyWithoutStoreInput
+  vehicles?: Prisma.VehicleUncheckedCreateNestedManyWithoutStoreInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutStoreInput
   config?: Prisma.ConfigUncheckedCreateNestedOneWithoutStoreInput
 }
 
@@ -699,6 +909,12 @@ export type StoreUpdateWithoutPartiesInput = {
   categories?: Prisma.CategoryUpdateManyWithoutStoreNestedInput
   products?: Prisma.ProductUpdateManyWithoutStoreNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutStoreNestedInput
+  brands?: Prisma.BrandUpdateManyWithoutStoreNestedInput
+  employees?: Prisma.EmployeeUpdateManyWithoutStoreNestedInput
+  accounts?: Prisma.BankAccountUpdateManyWithoutStoreNestedInput
+  deliveries?: Prisma.DeliveryUpdateManyWithoutStoreNestedInput
+  vehicles?: Prisma.VehicleUpdateManyWithoutStoreNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutStoreNestedInput
   config?: Prisma.ConfigUpdateOneWithoutStoreNestedInput
 }
 
@@ -712,6 +928,12 @@ export type StoreUncheckedUpdateWithoutPartiesInput = {
   categories?: Prisma.CategoryUncheckedUpdateManyWithoutStoreNestedInput
   products?: Prisma.ProductUncheckedUpdateManyWithoutStoreNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutStoreNestedInput
+  brands?: Prisma.BrandUncheckedUpdateManyWithoutStoreNestedInput
+  employees?: Prisma.EmployeeUncheckedUpdateManyWithoutStoreNestedInput
+  accounts?: Prisma.BankAccountUncheckedUpdateManyWithoutStoreNestedInput
+  deliveries?: Prisma.DeliveryUncheckedUpdateManyWithoutStoreNestedInput
+  vehicles?: Prisma.VehicleUncheckedUpdateManyWithoutStoreNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutStoreNestedInput
   config?: Prisma.ConfigUncheckedUpdateOneWithoutStoreNestedInput
 }
 
@@ -725,6 +947,12 @@ export type StoreCreateWithoutTransactionsInput = {
   categories?: Prisma.CategoryCreateNestedManyWithoutStoreInput
   products?: Prisma.ProductCreateNestedManyWithoutStoreInput
   parties?: Prisma.PartyCreateNestedManyWithoutStoreInput
+  brands?: Prisma.BrandCreateNestedManyWithoutStoreInput
+  employees?: Prisma.EmployeeCreateNestedManyWithoutStoreInput
+  accounts?: Prisma.BankAccountCreateNestedManyWithoutStoreInput
+  deliveries?: Prisma.DeliveryCreateNestedManyWithoutStoreInput
+  vehicles?: Prisma.VehicleCreateNestedManyWithoutStoreInput
+  roles?: Prisma.RoleCreateNestedManyWithoutStoreInput
   config?: Prisma.ConfigCreateNestedOneWithoutStoreInput
 }
 
@@ -738,6 +966,12 @@ export type StoreUncheckedCreateWithoutTransactionsInput = {
   categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutStoreInput
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutStoreInput
   parties?: Prisma.PartyUncheckedCreateNestedManyWithoutStoreInput
+  brands?: Prisma.BrandUncheckedCreateNestedManyWithoutStoreInput
+  employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutStoreInput
+  accounts?: Prisma.BankAccountUncheckedCreateNestedManyWithoutStoreInput
+  deliveries?: Prisma.DeliveryUncheckedCreateNestedManyWithoutStoreInput
+  vehicles?: Prisma.VehicleUncheckedCreateNestedManyWithoutStoreInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutStoreInput
   config?: Prisma.ConfigUncheckedCreateNestedOneWithoutStoreInput
 }
 
@@ -767,6 +1001,12 @@ export type StoreUpdateWithoutTransactionsInput = {
   categories?: Prisma.CategoryUpdateManyWithoutStoreNestedInput
   products?: Prisma.ProductUpdateManyWithoutStoreNestedInput
   parties?: Prisma.PartyUpdateManyWithoutStoreNestedInput
+  brands?: Prisma.BrandUpdateManyWithoutStoreNestedInput
+  employees?: Prisma.EmployeeUpdateManyWithoutStoreNestedInput
+  accounts?: Prisma.BankAccountUpdateManyWithoutStoreNestedInput
+  deliveries?: Prisma.DeliveryUpdateManyWithoutStoreNestedInput
+  vehicles?: Prisma.VehicleUpdateManyWithoutStoreNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutStoreNestedInput
   config?: Prisma.ConfigUpdateOneWithoutStoreNestedInput
 }
 
@@ -780,6 +1020,12 @@ export type StoreUncheckedUpdateWithoutTransactionsInput = {
   categories?: Prisma.CategoryUncheckedUpdateManyWithoutStoreNestedInput
   products?: Prisma.ProductUncheckedUpdateManyWithoutStoreNestedInput
   parties?: Prisma.PartyUncheckedUpdateManyWithoutStoreNestedInput
+  brands?: Prisma.BrandUncheckedUpdateManyWithoutStoreNestedInput
+  employees?: Prisma.EmployeeUncheckedUpdateManyWithoutStoreNestedInput
+  accounts?: Prisma.BankAccountUncheckedUpdateManyWithoutStoreNestedInput
+  deliveries?: Prisma.DeliveryUncheckedUpdateManyWithoutStoreNestedInput
+  vehicles?: Prisma.VehicleUncheckedUpdateManyWithoutStoreNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutStoreNestedInput
   config?: Prisma.ConfigUncheckedUpdateOneWithoutStoreNestedInput
 }
 
@@ -794,6 +1040,12 @@ export type StoreCreateWithoutConfigInput = {
   products?: Prisma.ProductCreateNestedManyWithoutStoreInput
   parties?: Prisma.PartyCreateNestedManyWithoutStoreInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutStoreInput
+  brands?: Prisma.BrandCreateNestedManyWithoutStoreInput
+  employees?: Prisma.EmployeeCreateNestedManyWithoutStoreInput
+  accounts?: Prisma.BankAccountCreateNestedManyWithoutStoreInput
+  deliveries?: Prisma.DeliveryCreateNestedManyWithoutStoreInput
+  vehicles?: Prisma.VehicleCreateNestedManyWithoutStoreInput
+  roles?: Prisma.RoleCreateNestedManyWithoutStoreInput
 }
 
 export type StoreUncheckedCreateWithoutConfigInput = {
@@ -807,6 +1059,12 @@ export type StoreUncheckedCreateWithoutConfigInput = {
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutStoreInput
   parties?: Prisma.PartyUncheckedCreateNestedManyWithoutStoreInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutStoreInput
+  brands?: Prisma.BrandUncheckedCreateNestedManyWithoutStoreInput
+  employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutStoreInput
+  accounts?: Prisma.BankAccountUncheckedCreateNestedManyWithoutStoreInput
+  deliveries?: Prisma.DeliveryUncheckedCreateNestedManyWithoutStoreInput
+  vehicles?: Prisma.VehicleUncheckedCreateNestedManyWithoutStoreInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutStoreInput
 }
 
 export type StoreCreateOrConnectWithoutConfigInput = {
@@ -836,6 +1094,12 @@ export type StoreUpdateWithoutConfigInput = {
   products?: Prisma.ProductUpdateManyWithoutStoreNestedInput
   parties?: Prisma.PartyUpdateManyWithoutStoreNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutStoreNestedInput
+  brands?: Prisma.BrandUpdateManyWithoutStoreNestedInput
+  employees?: Prisma.EmployeeUpdateManyWithoutStoreNestedInput
+  accounts?: Prisma.BankAccountUpdateManyWithoutStoreNestedInput
+  deliveries?: Prisma.DeliveryUpdateManyWithoutStoreNestedInput
+  vehicles?: Prisma.VehicleUpdateManyWithoutStoreNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutStoreNestedInput
 }
 
 export type StoreUncheckedUpdateWithoutConfigInput = {
@@ -849,6 +1113,564 @@ export type StoreUncheckedUpdateWithoutConfigInput = {
   products?: Prisma.ProductUncheckedUpdateManyWithoutStoreNestedInput
   parties?: Prisma.PartyUncheckedUpdateManyWithoutStoreNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutStoreNestedInput
+  brands?: Prisma.BrandUncheckedUpdateManyWithoutStoreNestedInput
+  employees?: Prisma.EmployeeUncheckedUpdateManyWithoutStoreNestedInput
+  accounts?: Prisma.BankAccountUncheckedUpdateManyWithoutStoreNestedInput
+  deliveries?: Prisma.DeliveryUncheckedUpdateManyWithoutStoreNestedInput
+  vehicles?: Prisma.VehicleUncheckedUpdateManyWithoutStoreNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutStoreNestedInput
+}
+
+export type StoreCreateWithoutBrandsInput = {
+  id?: string
+  name: string
+  businessType: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserCreateNestedManyWithoutStoreInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutStoreInput
+  products?: Prisma.ProductCreateNestedManyWithoutStoreInput
+  parties?: Prisma.PartyCreateNestedManyWithoutStoreInput
+  transactions?: Prisma.TransactionCreateNestedManyWithoutStoreInput
+  employees?: Prisma.EmployeeCreateNestedManyWithoutStoreInput
+  accounts?: Prisma.BankAccountCreateNestedManyWithoutStoreInput
+  deliveries?: Prisma.DeliveryCreateNestedManyWithoutStoreInput
+  vehicles?: Prisma.VehicleCreateNestedManyWithoutStoreInput
+  roles?: Prisma.RoleCreateNestedManyWithoutStoreInput
+  config?: Prisma.ConfigCreateNestedOneWithoutStoreInput
+}
+
+export type StoreUncheckedCreateWithoutBrandsInput = {
+  id?: string
+  name: string
+  businessType: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutStoreInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutStoreInput
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutStoreInput
+  parties?: Prisma.PartyUncheckedCreateNestedManyWithoutStoreInput
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutStoreInput
+  employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutStoreInput
+  accounts?: Prisma.BankAccountUncheckedCreateNestedManyWithoutStoreInput
+  deliveries?: Prisma.DeliveryUncheckedCreateNestedManyWithoutStoreInput
+  vehicles?: Prisma.VehicleUncheckedCreateNestedManyWithoutStoreInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutStoreInput
+  config?: Prisma.ConfigUncheckedCreateNestedOneWithoutStoreInput
+}
+
+export type StoreCreateOrConnectWithoutBrandsInput = {
+  where: Prisma.StoreWhereUniqueInput
+  create: Prisma.XOR<Prisma.StoreCreateWithoutBrandsInput, Prisma.StoreUncheckedCreateWithoutBrandsInput>
+}
+
+export type StoreUpsertWithoutBrandsInput = {
+  update: Prisma.XOR<Prisma.StoreUpdateWithoutBrandsInput, Prisma.StoreUncheckedUpdateWithoutBrandsInput>
+  create: Prisma.XOR<Prisma.StoreCreateWithoutBrandsInput, Prisma.StoreUncheckedCreateWithoutBrandsInput>
+  where?: Prisma.StoreWhereInput
+}
+
+export type StoreUpdateToOneWithWhereWithoutBrandsInput = {
+  where?: Prisma.StoreWhereInput
+  data: Prisma.XOR<Prisma.StoreUpdateWithoutBrandsInput, Prisma.StoreUncheckedUpdateWithoutBrandsInput>
+}
+
+export type StoreUpdateWithoutBrandsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUpdateManyWithoutStoreNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutStoreNestedInput
+  products?: Prisma.ProductUpdateManyWithoutStoreNestedInput
+  parties?: Prisma.PartyUpdateManyWithoutStoreNestedInput
+  transactions?: Prisma.TransactionUpdateManyWithoutStoreNestedInput
+  employees?: Prisma.EmployeeUpdateManyWithoutStoreNestedInput
+  accounts?: Prisma.BankAccountUpdateManyWithoutStoreNestedInput
+  deliveries?: Prisma.DeliveryUpdateManyWithoutStoreNestedInput
+  vehicles?: Prisma.VehicleUpdateManyWithoutStoreNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutStoreNestedInput
+  config?: Prisma.ConfigUpdateOneWithoutStoreNestedInput
+}
+
+export type StoreUncheckedUpdateWithoutBrandsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutStoreNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutStoreNestedInput
+  products?: Prisma.ProductUncheckedUpdateManyWithoutStoreNestedInput
+  parties?: Prisma.PartyUncheckedUpdateManyWithoutStoreNestedInput
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutStoreNestedInput
+  employees?: Prisma.EmployeeUncheckedUpdateManyWithoutStoreNestedInput
+  accounts?: Prisma.BankAccountUncheckedUpdateManyWithoutStoreNestedInput
+  deliveries?: Prisma.DeliveryUncheckedUpdateManyWithoutStoreNestedInput
+  vehicles?: Prisma.VehicleUncheckedUpdateManyWithoutStoreNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutStoreNestedInput
+  config?: Prisma.ConfigUncheckedUpdateOneWithoutStoreNestedInput
+}
+
+export type StoreCreateWithoutAccountsInput = {
+  id?: string
+  name: string
+  businessType: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserCreateNestedManyWithoutStoreInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutStoreInput
+  products?: Prisma.ProductCreateNestedManyWithoutStoreInput
+  parties?: Prisma.PartyCreateNestedManyWithoutStoreInput
+  transactions?: Prisma.TransactionCreateNestedManyWithoutStoreInput
+  brands?: Prisma.BrandCreateNestedManyWithoutStoreInput
+  employees?: Prisma.EmployeeCreateNestedManyWithoutStoreInput
+  deliveries?: Prisma.DeliveryCreateNestedManyWithoutStoreInput
+  vehicles?: Prisma.VehicleCreateNestedManyWithoutStoreInput
+  roles?: Prisma.RoleCreateNestedManyWithoutStoreInput
+  config?: Prisma.ConfigCreateNestedOneWithoutStoreInput
+}
+
+export type StoreUncheckedCreateWithoutAccountsInput = {
+  id?: string
+  name: string
+  businessType: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutStoreInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutStoreInput
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutStoreInput
+  parties?: Prisma.PartyUncheckedCreateNestedManyWithoutStoreInput
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutStoreInput
+  brands?: Prisma.BrandUncheckedCreateNestedManyWithoutStoreInput
+  employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutStoreInput
+  deliveries?: Prisma.DeliveryUncheckedCreateNestedManyWithoutStoreInput
+  vehicles?: Prisma.VehicleUncheckedCreateNestedManyWithoutStoreInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutStoreInput
+  config?: Prisma.ConfigUncheckedCreateNestedOneWithoutStoreInput
+}
+
+export type StoreCreateOrConnectWithoutAccountsInput = {
+  where: Prisma.StoreWhereUniqueInput
+  create: Prisma.XOR<Prisma.StoreCreateWithoutAccountsInput, Prisma.StoreUncheckedCreateWithoutAccountsInput>
+}
+
+export type StoreUpsertWithoutAccountsInput = {
+  update: Prisma.XOR<Prisma.StoreUpdateWithoutAccountsInput, Prisma.StoreUncheckedUpdateWithoutAccountsInput>
+  create: Prisma.XOR<Prisma.StoreCreateWithoutAccountsInput, Prisma.StoreUncheckedCreateWithoutAccountsInput>
+  where?: Prisma.StoreWhereInput
+}
+
+export type StoreUpdateToOneWithWhereWithoutAccountsInput = {
+  where?: Prisma.StoreWhereInput
+  data: Prisma.XOR<Prisma.StoreUpdateWithoutAccountsInput, Prisma.StoreUncheckedUpdateWithoutAccountsInput>
+}
+
+export type StoreUpdateWithoutAccountsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUpdateManyWithoutStoreNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutStoreNestedInput
+  products?: Prisma.ProductUpdateManyWithoutStoreNestedInput
+  parties?: Prisma.PartyUpdateManyWithoutStoreNestedInput
+  transactions?: Prisma.TransactionUpdateManyWithoutStoreNestedInput
+  brands?: Prisma.BrandUpdateManyWithoutStoreNestedInput
+  employees?: Prisma.EmployeeUpdateManyWithoutStoreNestedInput
+  deliveries?: Prisma.DeliveryUpdateManyWithoutStoreNestedInput
+  vehicles?: Prisma.VehicleUpdateManyWithoutStoreNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutStoreNestedInput
+  config?: Prisma.ConfigUpdateOneWithoutStoreNestedInput
+}
+
+export type StoreUncheckedUpdateWithoutAccountsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutStoreNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutStoreNestedInput
+  products?: Prisma.ProductUncheckedUpdateManyWithoutStoreNestedInput
+  parties?: Prisma.PartyUncheckedUpdateManyWithoutStoreNestedInput
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutStoreNestedInput
+  brands?: Prisma.BrandUncheckedUpdateManyWithoutStoreNestedInput
+  employees?: Prisma.EmployeeUncheckedUpdateManyWithoutStoreNestedInput
+  deliveries?: Prisma.DeliveryUncheckedUpdateManyWithoutStoreNestedInput
+  vehicles?: Prisma.VehicleUncheckedUpdateManyWithoutStoreNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutStoreNestedInput
+  config?: Prisma.ConfigUncheckedUpdateOneWithoutStoreNestedInput
+}
+
+export type StoreCreateWithoutEmployeesInput = {
+  id?: string
+  name: string
+  businessType: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserCreateNestedManyWithoutStoreInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutStoreInput
+  products?: Prisma.ProductCreateNestedManyWithoutStoreInput
+  parties?: Prisma.PartyCreateNestedManyWithoutStoreInput
+  transactions?: Prisma.TransactionCreateNestedManyWithoutStoreInput
+  brands?: Prisma.BrandCreateNestedManyWithoutStoreInput
+  accounts?: Prisma.BankAccountCreateNestedManyWithoutStoreInput
+  deliveries?: Prisma.DeliveryCreateNestedManyWithoutStoreInput
+  vehicles?: Prisma.VehicleCreateNestedManyWithoutStoreInput
+  roles?: Prisma.RoleCreateNestedManyWithoutStoreInput
+  config?: Prisma.ConfigCreateNestedOneWithoutStoreInput
+}
+
+export type StoreUncheckedCreateWithoutEmployeesInput = {
+  id?: string
+  name: string
+  businessType: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutStoreInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutStoreInput
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutStoreInput
+  parties?: Prisma.PartyUncheckedCreateNestedManyWithoutStoreInput
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutStoreInput
+  brands?: Prisma.BrandUncheckedCreateNestedManyWithoutStoreInput
+  accounts?: Prisma.BankAccountUncheckedCreateNestedManyWithoutStoreInput
+  deliveries?: Prisma.DeliveryUncheckedCreateNestedManyWithoutStoreInput
+  vehicles?: Prisma.VehicleUncheckedCreateNestedManyWithoutStoreInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutStoreInput
+  config?: Prisma.ConfigUncheckedCreateNestedOneWithoutStoreInput
+}
+
+export type StoreCreateOrConnectWithoutEmployeesInput = {
+  where: Prisma.StoreWhereUniqueInput
+  create: Prisma.XOR<Prisma.StoreCreateWithoutEmployeesInput, Prisma.StoreUncheckedCreateWithoutEmployeesInput>
+}
+
+export type StoreUpsertWithoutEmployeesInput = {
+  update: Prisma.XOR<Prisma.StoreUpdateWithoutEmployeesInput, Prisma.StoreUncheckedUpdateWithoutEmployeesInput>
+  create: Prisma.XOR<Prisma.StoreCreateWithoutEmployeesInput, Prisma.StoreUncheckedCreateWithoutEmployeesInput>
+  where?: Prisma.StoreWhereInput
+}
+
+export type StoreUpdateToOneWithWhereWithoutEmployeesInput = {
+  where?: Prisma.StoreWhereInput
+  data: Prisma.XOR<Prisma.StoreUpdateWithoutEmployeesInput, Prisma.StoreUncheckedUpdateWithoutEmployeesInput>
+}
+
+export type StoreUpdateWithoutEmployeesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUpdateManyWithoutStoreNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutStoreNestedInput
+  products?: Prisma.ProductUpdateManyWithoutStoreNestedInput
+  parties?: Prisma.PartyUpdateManyWithoutStoreNestedInput
+  transactions?: Prisma.TransactionUpdateManyWithoutStoreNestedInput
+  brands?: Prisma.BrandUpdateManyWithoutStoreNestedInput
+  accounts?: Prisma.BankAccountUpdateManyWithoutStoreNestedInput
+  deliveries?: Prisma.DeliveryUpdateManyWithoutStoreNestedInput
+  vehicles?: Prisma.VehicleUpdateManyWithoutStoreNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutStoreNestedInput
+  config?: Prisma.ConfigUpdateOneWithoutStoreNestedInput
+}
+
+export type StoreUncheckedUpdateWithoutEmployeesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutStoreNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutStoreNestedInput
+  products?: Prisma.ProductUncheckedUpdateManyWithoutStoreNestedInput
+  parties?: Prisma.PartyUncheckedUpdateManyWithoutStoreNestedInput
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutStoreNestedInput
+  brands?: Prisma.BrandUncheckedUpdateManyWithoutStoreNestedInput
+  accounts?: Prisma.BankAccountUncheckedUpdateManyWithoutStoreNestedInput
+  deliveries?: Prisma.DeliveryUncheckedUpdateManyWithoutStoreNestedInput
+  vehicles?: Prisma.VehicleUncheckedUpdateManyWithoutStoreNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutStoreNestedInput
+  config?: Prisma.ConfigUncheckedUpdateOneWithoutStoreNestedInput
+}
+
+export type StoreCreateWithoutVehiclesInput = {
+  id?: string
+  name: string
+  businessType: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserCreateNestedManyWithoutStoreInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutStoreInput
+  products?: Prisma.ProductCreateNestedManyWithoutStoreInput
+  parties?: Prisma.PartyCreateNestedManyWithoutStoreInput
+  transactions?: Prisma.TransactionCreateNestedManyWithoutStoreInput
+  brands?: Prisma.BrandCreateNestedManyWithoutStoreInput
+  employees?: Prisma.EmployeeCreateNestedManyWithoutStoreInput
+  accounts?: Prisma.BankAccountCreateNestedManyWithoutStoreInput
+  deliveries?: Prisma.DeliveryCreateNestedManyWithoutStoreInput
+  roles?: Prisma.RoleCreateNestedManyWithoutStoreInput
+  config?: Prisma.ConfigCreateNestedOneWithoutStoreInput
+}
+
+export type StoreUncheckedCreateWithoutVehiclesInput = {
+  id?: string
+  name: string
+  businessType: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutStoreInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutStoreInput
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutStoreInput
+  parties?: Prisma.PartyUncheckedCreateNestedManyWithoutStoreInput
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutStoreInput
+  brands?: Prisma.BrandUncheckedCreateNestedManyWithoutStoreInput
+  employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutStoreInput
+  accounts?: Prisma.BankAccountUncheckedCreateNestedManyWithoutStoreInput
+  deliveries?: Prisma.DeliveryUncheckedCreateNestedManyWithoutStoreInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutStoreInput
+  config?: Prisma.ConfigUncheckedCreateNestedOneWithoutStoreInput
+}
+
+export type StoreCreateOrConnectWithoutVehiclesInput = {
+  where: Prisma.StoreWhereUniqueInput
+  create: Prisma.XOR<Prisma.StoreCreateWithoutVehiclesInput, Prisma.StoreUncheckedCreateWithoutVehiclesInput>
+}
+
+export type StoreUpsertWithoutVehiclesInput = {
+  update: Prisma.XOR<Prisma.StoreUpdateWithoutVehiclesInput, Prisma.StoreUncheckedUpdateWithoutVehiclesInput>
+  create: Prisma.XOR<Prisma.StoreCreateWithoutVehiclesInput, Prisma.StoreUncheckedCreateWithoutVehiclesInput>
+  where?: Prisma.StoreWhereInput
+}
+
+export type StoreUpdateToOneWithWhereWithoutVehiclesInput = {
+  where?: Prisma.StoreWhereInput
+  data: Prisma.XOR<Prisma.StoreUpdateWithoutVehiclesInput, Prisma.StoreUncheckedUpdateWithoutVehiclesInput>
+}
+
+export type StoreUpdateWithoutVehiclesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUpdateManyWithoutStoreNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutStoreNestedInput
+  products?: Prisma.ProductUpdateManyWithoutStoreNestedInput
+  parties?: Prisma.PartyUpdateManyWithoutStoreNestedInput
+  transactions?: Prisma.TransactionUpdateManyWithoutStoreNestedInput
+  brands?: Prisma.BrandUpdateManyWithoutStoreNestedInput
+  employees?: Prisma.EmployeeUpdateManyWithoutStoreNestedInput
+  accounts?: Prisma.BankAccountUpdateManyWithoutStoreNestedInput
+  deliveries?: Prisma.DeliveryUpdateManyWithoutStoreNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutStoreNestedInput
+  config?: Prisma.ConfigUpdateOneWithoutStoreNestedInput
+}
+
+export type StoreUncheckedUpdateWithoutVehiclesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutStoreNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutStoreNestedInput
+  products?: Prisma.ProductUncheckedUpdateManyWithoutStoreNestedInput
+  parties?: Prisma.PartyUncheckedUpdateManyWithoutStoreNestedInput
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutStoreNestedInput
+  brands?: Prisma.BrandUncheckedUpdateManyWithoutStoreNestedInput
+  employees?: Prisma.EmployeeUncheckedUpdateManyWithoutStoreNestedInput
+  accounts?: Prisma.BankAccountUncheckedUpdateManyWithoutStoreNestedInput
+  deliveries?: Prisma.DeliveryUncheckedUpdateManyWithoutStoreNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutStoreNestedInput
+  config?: Prisma.ConfigUncheckedUpdateOneWithoutStoreNestedInput
+}
+
+export type StoreCreateWithoutDeliveriesInput = {
+  id?: string
+  name: string
+  businessType: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserCreateNestedManyWithoutStoreInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutStoreInput
+  products?: Prisma.ProductCreateNestedManyWithoutStoreInput
+  parties?: Prisma.PartyCreateNestedManyWithoutStoreInput
+  transactions?: Prisma.TransactionCreateNestedManyWithoutStoreInput
+  brands?: Prisma.BrandCreateNestedManyWithoutStoreInput
+  employees?: Prisma.EmployeeCreateNestedManyWithoutStoreInput
+  accounts?: Prisma.BankAccountCreateNestedManyWithoutStoreInput
+  vehicles?: Prisma.VehicleCreateNestedManyWithoutStoreInput
+  roles?: Prisma.RoleCreateNestedManyWithoutStoreInput
+  config?: Prisma.ConfigCreateNestedOneWithoutStoreInput
+}
+
+export type StoreUncheckedCreateWithoutDeliveriesInput = {
+  id?: string
+  name: string
+  businessType: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutStoreInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutStoreInput
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutStoreInput
+  parties?: Prisma.PartyUncheckedCreateNestedManyWithoutStoreInput
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutStoreInput
+  brands?: Prisma.BrandUncheckedCreateNestedManyWithoutStoreInput
+  employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutStoreInput
+  accounts?: Prisma.BankAccountUncheckedCreateNestedManyWithoutStoreInput
+  vehicles?: Prisma.VehicleUncheckedCreateNestedManyWithoutStoreInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutStoreInput
+  config?: Prisma.ConfigUncheckedCreateNestedOneWithoutStoreInput
+}
+
+export type StoreCreateOrConnectWithoutDeliveriesInput = {
+  where: Prisma.StoreWhereUniqueInput
+  create: Prisma.XOR<Prisma.StoreCreateWithoutDeliveriesInput, Prisma.StoreUncheckedCreateWithoutDeliveriesInput>
+}
+
+export type StoreUpsertWithoutDeliveriesInput = {
+  update: Prisma.XOR<Prisma.StoreUpdateWithoutDeliveriesInput, Prisma.StoreUncheckedUpdateWithoutDeliveriesInput>
+  create: Prisma.XOR<Prisma.StoreCreateWithoutDeliveriesInput, Prisma.StoreUncheckedCreateWithoutDeliveriesInput>
+  where?: Prisma.StoreWhereInput
+}
+
+export type StoreUpdateToOneWithWhereWithoutDeliveriesInput = {
+  where?: Prisma.StoreWhereInput
+  data: Prisma.XOR<Prisma.StoreUpdateWithoutDeliveriesInput, Prisma.StoreUncheckedUpdateWithoutDeliveriesInput>
+}
+
+export type StoreUpdateWithoutDeliveriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUpdateManyWithoutStoreNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutStoreNestedInput
+  products?: Prisma.ProductUpdateManyWithoutStoreNestedInput
+  parties?: Prisma.PartyUpdateManyWithoutStoreNestedInput
+  transactions?: Prisma.TransactionUpdateManyWithoutStoreNestedInput
+  brands?: Prisma.BrandUpdateManyWithoutStoreNestedInput
+  employees?: Prisma.EmployeeUpdateManyWithoutStoreNestedInput
+  accounts?: Prisma.BankAccountUpdateManyWithoutStoreNestedInput
+  vehicles?: Prisma.VehicleUpdateManyWithoutStoreNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutStoreNestedInput
+  config?: Prisma.ConfigUpdateOneWithoutStoreNestedInput
+}
+
+export type StoreUncheckedUpdateWithoutDeliveriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutStoreNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutStoreNestedInput
+  products?: Prisma.ProductUncheckedUpdateManyWithoutStoreNestedInput
+  parties?: Prisma.PartyUncheckedUpdateManyWithoutStoreNestedInput
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutStoreNestedInput
+  brands?: Prisma.BrandUncheckedUpdateManyWithoutStoreNestedInput
+  employees?: Prisma.EmployeeUncheckedUpdateManyWithoutStoreNestedInput
+  accounts?: Prisma.BankAccountUncheckedUpdateManyWithoutStoreNestedInput
+  vehicles?: Prisma.VehicleUncheckedUpdateManyWithoutStoreNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutStoreNestedInput
+  config?: Prisma.ConfigUncheckedUpdateOneWithoutStoreNestedInput
+}
+
+export type StoreCreateWithoutRolesInput = {
+  id?: string
+  name: string
+  businessType: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserCreateNestedManyWithoutStoreInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutStoreInput
+  products?: Prisma.ProductCreateNestedManyWithoutStoreInput
+  parties?: Prisma.PartyCreateNestedManyWithoutStoreInput
+  transactions?: Prisma.TransactionCreateNestedManyWithoutStoreInput
+  brands?: Prisma.BrandCreateNestedManyWithoutStoreInput
+  employees?: Prisma.EmployeeCreateNestedManyWithoutStoreInput
+  accounts?: Prisma.BankAccountCreateNestedManyWithoutStoreInput
+  deliveries?: Prisma.DeliveryCreateNestedManyWithoutStoreInput
+  vehicles?: Prisma.VehicleCreateNestedManyWithoutStoreInput
+  config?: Prisma.ConfigCreateNestedOneWithoutStoreInput
+}
+
+export type StoreUncheckedCreateWithoutRolesInput = {
+  id?: string
+  name: string
+  businessType: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutStoreInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutStoreInput
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutStoreInput
+  parties?: Prisma.PartyUncheckedCreateNestedManyWithoutStoreInput
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutStoreInput
+  brands?: Prisma.BrandUncheckedCreateNestedManyWithoutStoreInput
+  employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutStoreInput
+  accounts?: Prisma.BankAccountUncheckedCreateNestedManyWithoutStoreInput
+  deliveries?: Prisma.DeliveryUncheckedCreateNestedManyWithoutStoreInput
+  vehicles?: Prisma.VehicleUncheckedCreateNestedManyWithoutStoreInput
+  config?: Prisma.ConfigUncheckedCreateNestedOneWithoutStoreInput
+}
+
+export type StoreCreateOrConnectWithoutRolesInput = {
+  where: Prisma.StoreWhereUniqueInput
+  create: Prisma.XOR<Prisma.StoreCreateWithoutRolesInput, Prisma.StoreUncheckedCreateWithoutRolesInput>
+}
+
+export type StoreUpsertWithoutRolesInput = {
+  update: Prisma.XOR<Prisma.StoreUpdateWithoutRolesInput, Prisma.StoreUncheckedUpdateWithoutRolesInput>
+  create: Prisma.XOR<Prisma.StoreCreateWithoutRolesInput, Prisma.StoreUncheckedCreateWithoutRolesInput>
+  where?: Prisma.StoreWhereInput
+}
+
+export type StoreUpdateToOneWithWhereWithoutRolesInput = {
+  where?: Prisma.StoreWhereInput
+  data: Prisma.XOR<Prisma.StoreUpdateWithoutRolesInput, Prisma.StoreUncheckedUpdateWithoutRolesInput>
+}
+
+export type StoreUpdateWithoutRolesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUpdateManyWithoutStoreNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutStoreNestedInput
+  products?: Prisma.ProductUpdateManyWithoutStoreNestedInput
+  parties?: Prisma.PartyUpdateManyWithoutStoreNestedInput
+  transactions?: Prisma.TransactionUpdateManyWithoutStoreNestedInput
+  brands?: Prisma.BrandUpdateManyWithoutStoreNestedInput
+  employees?: Prisma.EmployeeUpdateManyWithoutStoreNestedInput
+  accounts?: Prisma.BankAccountUpdateManyWithoutStoreNestedInput
+  deliveries?: Prisma.DeliveryUpdateManyWithoutStoreNestedInput
+  vehicles?: Prisma.VehicleUpdateManyWithoutStoreNestedInput
+  config?: Prisma.ConfigUpdateOneWithoutStoreNestedInput
+}
+
+export type StoreUncheckedUpdateWithoutRolesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutStoreNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutStoreNestedInput
+  products?: Prisma.ProductUncheckedUpdateManyWithoutStoreNestedInput
+  parties?: Prisma.PartyUncheckedUpdateManyWithoutStoreNestedInput
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutStoreNestedInput
+  brands?: Prisma.BrandUncheckedUpdateManyWithoutStoreNestedInput
+  employees?: Prisma.EmployeeUncheckedUpdateManyWithoutStoreNestedInput
+  accounts?: Prisma.BankAccountUncheckedUpdateManyWithoutStoreNestedInput
+  deliveries?: Prisma.DeliveryUncheckedUpdateManyWithoutStoreNestedInput
+  vehicles?: Prisma.VehicleUncheckedUpdateManyWithoutStoreNestedInput
+  config?: Prisma.ConfigUncheckedUpdateOneWithoutStoreNestedInput
 }
 
 
@@ -862,6 +1684,12 @@ export type StoreCountOutputType = {
   products: number
   parties: number
   transactions: number
+  brands: number
+  employees: number
+  accounts: number
+  deliveries: number
+  vehicles: number
+  roles: number
 }
 
 export type StoreCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -870,6 +1698,12 @@ export type StoreCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.
   products?: boolean | StoreCountOutputTypeCountProductsArgs
   parties?: boolean | StoreCountOutputTypeCountPartiesArgs
   transactions?: boolean | StoreCountOutputTypeCountTransactionsArgs
+  brands?: boolean | StoreCountOutputTypeCountBrandsArgs
+  employees?: boolean | StoreCountOutputTypeCountEmployeesArgs
+  accounts?: boolean | StoreCountOutputTypeCountAccountsArgs
+  deliveries?: boolean | StoreCountOutputTypeCountDeliveriesArgs
+  vehicles?: boolean | StoreCountOutputTypeCountVehiclesArgs
+  roles?: boolean | StoreCountOutputTypeCountRolesArgs
 }
 
 /**
@@ -917,6 +1751,48 @@ export type StoreCountOutputTypeCountTransactionsArgs<ExtArgs extends runtime.Ty
   where?: Prisma.TransactionWhereInput
 }
 
+/**
+ * StoreCountOutputType without action
+ */
+export type StoreCountOutputTypeCountBrandsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BrandWhereInput
+}
+
+/**
+ * StoreCountOutputType without action
+ */
+export type StoreCountOutputTypeCountEmployeesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EmployeeWhereInput
+}
+
+/**
+ * StoreCountOutputType without action
+ */
+export type StoreCountOutputTypeCountAccountsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BankAccountWhereInput
+}
+
+/**
+ * StoreCountOutputType without action
+ */
+export type StoreCountOutputTypeCountDeliveriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DeliveryWhereInput
+}
+
+/**
+ * StoreCountOutputType without action
+ */
+export type StoreCountOutputTypeCountVehiclesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.VehicleWhereInput
+}
+
+/**
+ * StoreCountOutputType without action
+ */
+export type StoreCountOutputTypeCountRolesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RoleWhereInput
+}
+
 
 export type StoreSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -929,6 +1805,12 @@ export type StoreSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   products?: boolean | Prisma.Store$productsArgs<ExtArgs>
   parties?: boolean | Prisma.Store$partiesArgs<ExtArgs>
   transactions?: boolean | Prisma.Store$transactionsArgs<ExtArgs>
+  brands?: boolean | Prisma.Store$brandsArgs<ExtArgs>
+  employees?: boolean | Prisma.Store$employeesArgs<ExtArgs>
+  accounts?: boolean | Prisma.Store$accountsArgs<ExtArgs>
+  deliveries?: boolean | Prisma.Store$deliveriesArgs<ExtArgs>
+  vehicles?: boolean | Prisma.Store$vehiclesArgs<ExtArgs>
+  roles?: boolean | Prisma.Store$rolesArgs<ExtArgs>
   config?: boolean | Prisma.Store$configArgs<ExtArgs>
   _count?: boolean | Prisma.StoreCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["store"]>
@@ -964,6 +1846,12 @@ export type StoreInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   products?: boolean | Prisma.Store$productsArgs<ExtArgs>
   parties?: boolean | Prisma.Store$partiesArgs<ExtArgs>
   transactions?: boolean | Prisma.Store$transactionsArgs<ExtArgs>
+  brands?: boolean | Prisma.Store$brandsArgs<ExtArgs>
+  employees?: boolean | Prisma.Store$employeesArgs<ExtArgs>
+  accounts?: boolean | Prisma.Store$accountsArgs<ExtArgs>
+  deliveries?: boolean | Prisma.Store$deliveriesArgs<ExtArgs>
+  vehicles?: boolean | Prisma.Store$vehiclesArgs<ExtArgs>
+  roles?: boolean | Prisma.Store$rolesArgs<ExtArgs>
   config?: boolean | Prisma.Store$configArgs<ExtArgs>
   _count?: boolean | Prisma.StoreCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -978,6 +1866,12 @@ export type $StorePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     products: Prisma.$ProductPayload<ExtArgs>[]
     parties: Prisma.$PartyPayload<ExtArgs>[]
     transactions: Prisma.$TransactionPayload<ExtArgs>[]
+    brands: Prisma.$BrandPayload<ExtArgs>[]
+    employees: Prisma.$EmployeePayload<ExtArgs>[]
+    accounts: Prisma.$BankAccountPayload<ExtArgs>[]
+    deliveries: Prisma.$DeliveryPayload<ExtArgs>[]
+    vehicles: Prisma.$VehiclePayload<ExtArgs>[]
+    roles: Prisma.$RolePayload<ExtArgs>[]
     config: Prisma.$ConfigPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1385,6 +2279,12 @@ export interface Prisma__StoreClient<T, Null = never, ExtArgs extends runtime.Ty
   products<T extends Prisma.Store$productsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Store$productsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   parties<T extends Prisma.Store$partiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Store$partiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PartyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   transactions<T extends Prisma.Store$transactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Store$transactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  brands<T extends Prisma.Store$brandsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Store$brandsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BrandPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  employees<T extends Prisma.Store$employeesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Store$employeesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  accounts<T extends Prisma.Store$accountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Store$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BankAccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  deliveries<T extends Prisma.Store$deliveriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Store$deliveriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DeliveryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  vehicles<T extends Prisma.Store$vehiclesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Store$vehiclesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VehiclePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  roles<T extends Prisma.Store$rolesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Store$rolesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   config<T extends Prisma.Store$configArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Store$configArgs<ExtArgs>>): Prisma.Prisma__ConfigClient<runtime.Types.Result.GetResult<Prisma.$ConfigPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1930,6 +2830,150 @@ export type Store$transactionsArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.TransactionScalarFieldEnum | Prisma.TransactionScalarFieldEnum[]
+}
+
+/**
+ * Store.brands
+ */
+export type Store$brandsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Brand
+   */
+  select?: Prisma.BrandSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Brand
+   */
+  omit?: Prisma.BrandOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BrandInclude<ExtArgs> | null
+  where?: Prisma.BrandWhereInput
+  orderBy?: Prisma.BrandOrderByWithRelationInput | Prisma.BrandOrderByWithRelationInput[]
+  cursor?: Prisma.BrandWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BrandScalarFieldEnum | Prisma.BrandScalarFieldEnum[]
+}
+
+/**
+ * Store.employees
+ */
+export type Store$employeesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Employee
+   */
+  select?: Prisma.EmployeeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Employee
+   */
+  omit?: Prisma.EmployeeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EmployeeInclude<ExtArgs> | null
+  where?: Prisma.EmployeeWhereInput
+  orderBy?: Prisma.EmployeeOrderByWithRelationInput | Prisma.EmployeeOrderByWithRelationInput[]
+  cursor?: Prisma.EmployeeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EmployeeScalarFieldEnum | Prisma.EmployeeScalarFieldEnum[]
+}
+
+/**
+ * Store.accounts
+ */
+export type Store$accountsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BankAccount
+   */
+  select?: Prisma.BankAccountSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BankAccount
+   */
+  omit?: Prisma.BankAccountOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BankAccountInclude<ExtArgs> | null
+  where?: Prisma.BankAccountWhereInput
+  orderBy?: Prisma.BankAccountOrderByWithRelationInput | Prisma.BankAccountOrderByWithRelationInput[]
+  cursor?: Prisma.BankAccountWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BankAccountScalarFieldEnum | Prisma.BankAccountScalarFieldEnum[]
+}
+
+/**
+ * Store.deliveries
+ */
+export type Store$deliveriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Delivery
+   */
+  select?: Prisma.DeliverySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Delivery
+   */
+  omit?: Prisma.DeliveryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DeliveryInclude<ExtArgs> | null
+  where?: Prisma.DeliveryWhereInput
+  orderBy?: Prisma.DeliveryOrderByWithRelationInput | Prisma.DeliveryOrderByWithRelationInput[]
+  cursor?: Prisma.DeliveryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DeliveryScalarFieldEnum | Prisma.DeliveryScalarFieldEnum[]
+}
+
+/**
+ * Store.vehicles
+ */
+export type Store$vehiclesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Vehicle
+   */
+  select?: Prisma.VehicleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Vehicle
+   */
+  omit?: Prisma.VehicleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VehicleInclude<ExtArgs> | null
+  where?: Prisma.VehicleWhereInput
+  orderBy?: Prisma.VehicleOrderByWithRelationInput | Prisma.VehicleOrderByWithRelationInput[]
+  cursor?: Prisma.VehicleWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.VehicleScalarFieldEnum | Prisma.VehicleScalarFieldEnum[]
+}
+
+/**
+ * Store.roles
+ */
+export type Store$rolesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Role
+   */
+  select?: Prisma.RoleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Role
+   */
+  omit?: Prisma.RoleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RoleInclude<ExtArgs> | null
+  where?: Prisma.RoleWhereInput
+  orderBy?: Prisma.RoleOrderByWithRelationInput | Prisma.RoleOrderByWithRelationInput[]
+  cursor?: Prisma.RoleWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RoleScalarFieldEnum | Prisma.RoleScalarFieldEnum[]
 }
 
 /**

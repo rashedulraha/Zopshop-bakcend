@@ -20,7 +20,9 @@ export type PartyType = (typeof PartyType)[keyof typeof PartyType]
 
 export const TransactionType = {
   SALE: 'SALE',
+  SALE_RETURN: 'SALE_RETURN',
   PURCHASE: 'PURCHASE',
+  PURCHASE_RETURN: 'PURCHASE_RETURN',
   EXPENSE: 'EXPENSE',
   PAYMENT_RECEIVED: 'PAYMENT_RECEIVED',
   PAYMENT_SENT: 'PAYMENT_SENT'
@@ -36,3 +38,23 @@ export const TransactionMode = {
 } as const
 
 export type TransactionMode = (typeof TransactionMode)[keyof typeof TransactionMode]
+
+
+export const DeliveryStatus = {
+  PENDING: 'PENDING',
+  IN_TRANSIT: 'IN_TRANSIT',
+  DELIVERED: 'DELIVERED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type DeliveryStatus = (typeof DeliveryStatus)[keyof typeof DeliveryStatus]
+
+
+export const AttendanceStatus = {
+  PRESENT: 'PRESENT',
+  ABSENT: 'ABSENT',
+  LATE: 'LATE',
+  LEAVE: 'LEAVE'
+} as const
+
+export type AttendanceStatus = (typeof AttendanceStatus)[keyof typeof AttendanceStatus]
