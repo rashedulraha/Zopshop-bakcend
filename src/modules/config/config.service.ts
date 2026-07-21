@@ -57,10 +57,9 @@ export const ConfigService = {
       select: {
         id: true,
         name: true,
-        address: true,
-        phone: true,
-        // Depending on Prisma schema, these might be different. Let's select what we know.
-        // Assuming Store model has address and phone from previous context or standard.
+        businessType: true,
+        createdAt: true,
+        updatedAt: true,
       },
     });
 
