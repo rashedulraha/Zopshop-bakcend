@@ -69,6 +69,12 @@ model Store {
   products     Product[]
   parties      Party[]
   transactions Transaction[]
+  brands       Brand[]
+  employees    Employee[]
+  accounts     BankAccount[]
+  deliveries   Delivery[]
+  vehicles     Vehicle[]
+  roles        Role[]
   config       Config?
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
@@ -99,7 +105,9 @@ enum PartyType {
 
 enum TransactionType {
   SALE
+  SALE_RETURN
   PURCHASE
+  PURCHASE_RETURN
   EXPENSE
   PAYMENT_RECEIVED
   PAYMENT_SENT
@@ -134,12 +142,15 @@ model Product {
   name             String
   categoryId       String?
   category         Category?         @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  brandId          String?
+  brand            Brand?            @relation(fields: [brandId], references: [id], onDelete: Cascade)
   storeId          String
   store            Store             @relation(fields: [storeId], references: [id], onDelete: Cascade)
   unit             String
   price            Float
   purchasePrice    Float
   stock            Float             @default(0)
+  minStock         Float             @default(5)
   sku              String?           @unique
   barcode          String?
   attributes       Json?
@@ -185,6 +196,8 @@ model Transaction {
   store           Store             @relation(fields: [storeId], references: [id], onDelete: Cascade)
   partyId         String?
   party           Party?            @relation(fields: [partyId], references: [id], onDelete: Cascade)
+  bankAccountId   String?
+  bankAccount     BankAccount?      @relation(fields: [bankAccountId], references: [id], onDelete: Cascade)
   type            TransactionType
   mode            TransactionMode
   amount          Float
@@ -199,6 +212,7 @@ model Transaction {
   items           TransactionItem[]
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt
+  delivery        Delivery?
 
   @@index([storeId])
   @@map("transaction")
@@ -243,4 +257,167 @@ model Config {
 
   @@index([storeId])
   @@map("config")
+}
+
+// =======================
+// New Enums
+// =======================
+
+enum DeliveryStatus {
+  PENDING
+  IN_TRANSIT
+  DELIVERED
+  CANCELLED
+}
+
+enum AttendanceStatus {
+  PRESENT
+  ABSENT
+  LATE
+  LEAVE
+}
+
+// =======================
+// Brand Module
+// =======================
+
+model Brand {
+  id        String    @id @default(uuid())
+  name      String
+  storeId   String
+  store     Store     @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  products  Product[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@unique([name, storeId])
+  @@index([storeId])
+  @@map("brand")
+}
+
+// =======================
+// Finance Module
+// =======================
+
+model BankAccount {
+  id            String        @id @default(uuid())
+  name          String
+  accountNumber String?
+  bankName      String?
+  branch        String?
+  balance       Float         @default(0)
+  storeId       String
+  store         Store         @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  transactions  Transaction[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@index([storeId])
+  @@map("bank_account")
+}
+
+// =======================
+// HR Module
+// =======================
+
+model Employee {
+  id         String       @id @default(uuid())
+  name       String
+  mobile     String
+  email      String?
+  address    String?
+  position   String?
+  salary     Float        @default(0)
+  storeId    String
+  store      Store        @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  attendance Attendance[]
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+
+  @@index([storeId])
+  @@map("employee")
+}
+
+model Attendance {
+  id         String           @id @default(uuid())
+  employeeId String
+  employee   Employee         @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  date       DateTime
+  status     AttendanceStatus
+  note       String?
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+
+  @@unique([employeeId, date])
+  @@index([employeeId])
+  @@map("attendance")
+}
+
+// =======================
+// Delivery Module
+// =======================
+
+model Vehicle {
+  id          String     @id @default(uuid())
+  name        String
+  plateNumber String     @unique
+  type        String?
+  storeId     String
+  store       Store      @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  deliveries  Delivery[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  @@index([storeId])
+  @@map("vehicle")
+}
+
+model Delivery {
+  id            String         @id @default(uuid())
+  transactionId String         @unique
+  transaction   Transaction    @relation(fields: [transactionId], references: [id], onDelete: Cascade)
+  vehicleId     String?
+  vehicle       Vehicle?       @relation(fields: [vehicleId], references: [id])
+  driverName    String?
+  driverMobile  String?
+  status        DeliveryStatus @default(PENDING)
+  storeId       String
+  store         Store          @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  address       String?
+  note          String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  @@index([storeId])
+  @@index([vehicleId])
+  @@map("delivery")
+}
+
+// =======================
+// Roles & Permissions Module
+// =======================
+
+model Role {
+  id          String       @id @default(uuid())
+  name        String
+  storeId     String
+  store       Store        @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  permissions Permission[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@unique([name, storeId])
+  @@index([storeId])
+  @@map("role")
+}
+
+model Permission {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  description String?
+  roles       Role[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("permission")
 }
