@@ -14,10 +14,14 @@ export const ReportService = {
       lowStockCount,
       recentTransactions,
       todayTransactions,
+      bankAccounts,
+      customerTransactions,
+      supplierTransactions,
+      cashTransactions,
     ] = await Promise.all([
       prisma.product.count({ where: { storeId } }),
       prisma.party.count({ where: { storeId } }),
-      prisma.product.count({ where: { storeId, stock: { lt: 10 } } }), // using 10 as default threshold
+      prisma.product.count({ where: { storeId, stock: { lt: 10 } } }),
       prisma.transaction.findMany({
         where: { storeId },
         orderBy: { transactionDate: "desc" },
@@ -26,6 +30,19 @@ export const ReportService = {
       }),
       prisma.transaction.findMany({
         where: { storeId, transactionDate: { gte: today } },
+        select: { type: true, netAmount: true },
+      }),
+      prisma.bankAccount.findMany({ where: { storeId } }),
+      prisma.transaction.aggregate({
+        where: { storeId, type: "SALE", mode: "CREDIT" },
+        _sum: { dueAmount: true },
+      }),
+      prisma.transaction.aggregate({
+        where: { storeId, type: "PURCHASE", mode: "CREDIT" },
+        _sum: { dueAmount: true },
+      }),
+      prisma.transaction.findMany({
+        where: { storeId, mode: "CASH" },
         select: { type: true, netAmount: true },
       }),
     ]);
@@ -43,14 +60,18 @@ export const ReportService = {
 
     const todayNetProfit = todaySales - todayExpenses;
 
-    // Calculate total outstanding from parties
-    // Since outstanding is tracked dynamically, we can sum the dueAmount for all CREDIT transactions where dueAmount > 0
-    // Actually, net outstanding is sum of all party balances.
-    // For simplicity as requested: "Sum of dueAmount for all CREDIT transactions"
-    const outstandingAgg = await prisma.transaction.aggregate({
-      where: { storeId, mode: "CREDIT" },
-      _sum: { dueAmount: true },
+    let cashBalance = 0;
+    cashTransactions.forEach((tx) => {
+      if (tx.type === "SALE" || tx.type === "PAYMENT_RECEIVED") {
+        cashBalance += tx.netAmount;
+      } else if (tx.type === "PURCHASE" || tx.type === "EXPENSE" || tx.type === "PAYMENT_SENT") {
+        cashBalance -= tx.netAmount;
+      }
     });
+
+    const bankBalance = bankAccounts.reduce((acc, account) => acc + (account.balance || 0), 0);
+    const customerDue = customerTransactions._sum.dueAmount || 0;
+    const supplierDue = supplierTransactions._sum.dueAmount || 0;
 
     return {
       totalProducts,
@@ -59,7 +80,11 @@ export const ReportService = {
       todayCollections,
       todayExpenses,
       todayNetProfit,
-      totalOutstanding: outstandingAgg._sum.dueAmount || 0,
+      totalOutstanding: customerDue,
+      customerDue,
+      supplierDue,
+      cashBalance,
+      bankBalance,
       lowStockCount,
       recentTransactions,
     };
