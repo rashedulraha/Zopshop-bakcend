@@ -13,6 +13,11 @@ router.post(
   validateRequest(createTransactionSchema),
   TransactionController.createTransaction,
 );
+router.post(
+  "/return",
+  validateRequest(createTransactionSchema),
+  TransactionController.createTransaction,
+);
 router.get("/", TransactionController.getAllTransactions);
 router.get("/daily-summary", TransactionController.getDailySummary);
 router.get("/:id", TransactionController.getTransactionById);
