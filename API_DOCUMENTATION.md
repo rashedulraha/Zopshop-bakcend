@@ -136,6 +136,72 @@ Any business type (grocery, pharmacy, hardware, wholesale, retail, etc.) needing
 | POST   | `/categories`        | Create category |
 | GET    | `/categories`        | List categories |
 
+### Stores (Protected)
+
+| Method | Endpoint  | Description          |
+| ------ | --------- | -------------------- |
+| GET    | `/stores` | List stores for user |
+| POST   | `/stores` | Create new store     |
+
+### Brands (Protected)
+
+| Method | Endpoint  | Description  |
+| ------ | --------- | ------------ |
+| GET    | `/brands` | List brands  |
+| POST   | `/brands` | Create brand |
+
+### Stock (Protected)
+
+| Method | Endpoint             | Description           |
+| ------ | -------------------- | --------------------- |
+| GET    | `/stock/alerts`      | Get stock alerts      |
+| POST   | `/stock/adjustments` | Adjust stock manually |
+
+### HR (Protected)
+
+| Method | Endpoint                | Description     |
+| ------ | ----------------------- | --------------- |
+| GET    | `/employees`            | List employees  |
+| POST   | `/employees`            | Create employee |
+| POST   | `/employees/attendance` | Mark attendance |
+| POST   | `/employees/salary`     | Pay salary      |
+
+### Finance (Protected)
+
+| Method | Endpoint               | Description         |
+| ------ | ---------------------- | ------------------- |
+| GET    | `/accounts`            | List bank accounts  |
+| POST   | `/accounts`            | Create bank account |
+| GET    | `/finance/income`      | Get total income    |
+| GET    | `/finance/expense`     | Get total expense   |
+| GET    | `/finance/profit-loss` | Get profit/loss     |
+
+### Delivery (Protected)
+
+| Method | Endpoint                 | Description            |
+| ------ | ------------------------ | ---------------------- |
+| GET    | `/vehicles`              | List vehicles          |
+| POST   | `/vehicles`              | Create vehicle         |
+| GET    | `/deliveries`            | List deliveries        |
+| POST   | `/deliveries`            | Create delivery        |
+| PUT    | `/deliveries/:id/status` | Update delivery status |
+
+### Users & Roles (Protected)
+
+| Method | Endpoint       | Description      |
+| ------ | -------------- | ---------------- |
+| GET    | `/users`       | List all users   |
+| GET    | `/roles`       | List roles       |
+| GET    | `/permissions` | List permissions |
+
+### Settings (Protected)
+
+| Method | Endpoint             | Description         |
+| ------ | -------------------- | ------------------- |
+| GET    | `/settings/tax`      | Get tax settings    |
+| GET    | `/settings/backup`   | Get backup info     |
+| GET    | `/settings/security` | Get security config |
+
 ---
 
 ## 6. Example Requests & Responses
