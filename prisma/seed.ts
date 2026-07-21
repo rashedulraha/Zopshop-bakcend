@@ -11,6 +11,27 @@ async function main() {
   console.log("🌱 Starting database seeding...");
 
   try {
+    // 0. Create Superadmin User
+    const superAdminPassword = await bcrypt.hash("Ygrjl,!{uwRQw!XkwUH-{.1hEg&", 10);
+    await prisma.user.upsert({
+      where: { email: "rashedulraha.bd@gmail.com" },
+      update: {},
+      create: {
+        email: "rashedulraha.bd@gmail.com",
+        name: "Super Admin",
+        emailVerified: true,
+        role: "SUPERADMIN",
+        accounts: {
+          create: {
+            providerId: "credential",
+            accountId: "rashedulraha.bd@gmail.com",
+            password: superAdminPassword,
+          },
+        },
+      },
+    });
+    console.log("✅ Created Superadmin User");
+
     // 1. Create Demo User
     const hashedPassword = await bcrypt.hash("password123", 10);
     const user = await prisma.user.upsert({
