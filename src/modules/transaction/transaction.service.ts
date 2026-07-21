@@ -1,6 +1,12 @@
 import { prisma } from "../../lib/prisma.js";
-import { generateInvoiceNo, calculateNetAmount } from "../../shared/utils/helpers.js";
-import type { TransactionTypeEnum, TransactionModeEnum } from "../../shared/utils/constants.js";
+import {
+  generateInvoiceNo,
+  calculateNetAmount,
+} from "../../shared/utils/helpers.js";
+import type {
+  TransactionTypeEnum,
+  TransactionModeEnum,
+} from "../../shared/utils/constants.js";
 
 interface TransactionItemDTO {
   productId: string;
@@ -35,7 +41,11 @@ interface TransactionFilters {
 }
 
 export const TransactionService = {
-  async createTransaction(data: CreateTransactionDTO, storeId: string, userId?: string) {
+  async createTransaction(
+    data: CreateTransactionDTO,
+    storeId: string,
+    userId?: string,
+  ) {
     const {
       partyId,
       type,
@@ -89,10 +99,16 @@ export const TransactionService = {
         },
       });
 
-      // 2. Handle Stock Updates for SALE and PURCHASE
-      if (type === "SALE" || type === "PURCHASE") {
+      // 2. Handle Stock Updates for SALE, PURCHASE, and RETURNS
+      if (["SALE", "PURCHASE", "SALE_RETURN", "PURCHASE_RETURN"].includes(type)) {
         for (const item of items) {
-          const operation = type === "SALE" ? "decrement" : "increment";
+          let operation = "increment";
+          if (type === "SALE" || type === "PURCHASE_RETURN") {
+            operation = "decrement";
+          } else if (type === "PURCHASE" || type === "SALE_RETURN") {
+            operation = "increment";
+          }
+          
           await tx.product.update({
             where: { id: item.productId },
             data: { stock: { [operation]: item.quantity } },
@@ -100,7 +116,7 @@ export const TransactionService = {
         }
       }
 
-      // Note: Party Balance is strictly calculated dynamically via aggregations, 
+      // Note: Party Balance is strictly calculated dynamically via aggregations,
       // so we do NOT explicitly update party.openingBalance here to avoid double counting.
 
       return transaction;
@@ -161,7 +177,11 @@ export const TransactionService = {
     });
   },
 
-  async updateTransaction(id: string, storeId: string, data: UpdateTransactionDTO) {
+  async updateTransaction(
+    id: string,
+    storeId: string,
+    data: UpdateTransactionDTO,
+  ) {
     // Note: A full update handles replacing items. It reverses the old transaction's stock effects,
     // deletes old items, and applies new effects and new items.
     return await prisma.$transaction(async (tx) => {
@@ -173,9 +193,15 @@ export const TransactionService = {
       if (!oldTx) throw new Error("Transaction not found");
 
       // 1. Reverse old stock effects
-      if (oldTx.type === "SALE" || oldTx.type === "PURCHASE") {
+      if (["SALE", "PURCHASE", "SALE_RETURN", "PURCHASE_RETURN"].includes(oldTx.type)) {
         for (const item of oldTx.items) {
-          const operation = oldTx.type === "SALE" ? "increment" : "decrement"; // Reverse
+          let operation = "decrement"; // Reverse of increment
+          if (oldTx.type === "SALE" || oldTx.type === "PURCHASE_RETURN") {
+            operation = "increment"; // Reverse of decrement
+          } else if (oldTx.type === "PURCHASE" || oldTx.type === "SALE_RETURN") {
+            operation = "decrement"; // Reverse of increment
+          }
+          
           await tx.product.update({
             where: { id: item.productId },
             data: { stock: { [operation]: item.quantity } },
@@ -194,17 +220,18 @@ export const TransactionService = {
       const discount = data.discount ?? oldTx.discount;
       const tax = data.tax ?? oldTx.tax;
       const paidAmount = data.paidAmount ?? oldTx.paidAmount;
-      
+
       const netAmount = calculateNetAmount(amount, discount, tax);
       const dueAmount = netAmount - paidAmount;
-      
+
       const items = data.items || [];
 
       // 4. Update transaction with new items
       const updatedTx = await tx.transaction.update({
         where: { id },
         data: {
-          partyId: data.partyId !== undefined ? (data.partyId || null) : oldTx.partyId,
+          partyId:
+            data.partyId !== undefined ? data.partyId || null : oldTx.partyId,
           type,
           mode: data.mode || oldTx.mode,
           amount,
@@ -213,9 +240,13 @@ export const TransactionService = {
           netAmount,
           paidAmount,
           dueAmount,
-          note: data.note !== undefined ? (data.note || null) : oldTx.note,
-          transactionDate: data.transactionDate ? new Date(data.transactionDate) : oldTx.transactionDate,
-          customData: (data.customData !== undefined ? data.customData : oldTx.customData) as any,
+          note: data.note !== undefined ? data.note || null : oldTx.note,
+          transactionDate: data.transactionDate
+            ? new Date(data.transactionDate)
+            : oldTx.transactionDate,
+          customData: (data.customData !== undefined
+            ? data.customData
+            : oldTx.customData) as any,
           items: {
             create: items.map((item) => ({
               productId: item.productId,
@@ -233,9 +264,14 @@ export const TransactionService = {
       });
 
       // 5. Apply new stock effects
-      if (type === "SALE" || type === "PURCHASE") {
+      if (["SALE", "PURCHASE", "SALE_RETURN", "PURCHASE_RETURN"].includes(type)) {
         for (const item of items) {
-          const operation = type === "SALE" ? "decrement" : "increment";
+          let operation = "increment";
+          if (type === "SALE" || type === "PURCHASE_RETURN") {
+            operation = "decrement";
+          } else if (type === "PURCHASE" || type === "SALE_RETURN") {
+            operation = "increment";
+          }
           await tx.product.update({
             where: { id: item.productId },
             data: { stock: { [operation]: item.quantity } },
@@ -257,9 +293,14 @@ export const TransactionService = {
       if (!oldTx) return false;
 
       // Reverse stock effects
-      if (oldTx.type === "SALE" || oldTx.type === "PURCHASE") {
+      if (["SALE", "PURCHASE", "SALE_RETURN", "PURCHASE_RETURN"].includes(oldTx.type)) {
         for (const item of oldTx.items) {
-          const operation = oldTx.type === "SALE" ? "increment" : "decrement"; // Reverse
+          let operation = "decrement"; // Reverse of increment
+          if (oldTx.type === "SALE" || oldTx.type === "PURCHASE_RETURN") {
+            operation = "increment"; // Reverse of decrement
+          } else if (oldTx.type === "PURCHASE" || oldTx.type === "SALE_RETURN") {
+            operation = "decrement"; // Reverse of increment
+          }
           await tx.product.update({
             where: { id: item.productId },
             data: { stock: { [operation]: item.quantity } },
@@ -280,7 +321,7 @@ export const TransactionService = {
   async getDailySummary(storeId: string, dateStr?: string) {
     const date = dateStr ? new Date(dateStr) : new Date();
     date.setHours(0, 0, 0, 0);
-    
+
     const nextDay = new Date(date);
     nextDay.setDate(nextDay.getDate() + 1);
 
