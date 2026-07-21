@@ -11,9 +11,12 @@ router.post(
   PartyController.createParty,
 );
 router.get("/", PartyController.getAllParties);
+router.get("/due", PartyController.getPartiesWithDue);
 router.get("/:id", PartyController.getPartyById);
 router.get("/:id/balance", PartyController.getPartyBalance);
+router.get("/:id/ledger", PartyController.getPartyLedger);
 router.get("/:id/transactions", PartyController.getPartyTransactions);
+router.post("/:id/payment", PartyController.makePayment);
 router.put(
   "/:id",
   validateRequest(updatePartySchema),
