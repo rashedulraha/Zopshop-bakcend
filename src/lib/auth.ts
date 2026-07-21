@@ -1,8 +1,9 @@
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
-import { PrismaClient } from "../../generated/prisma/client.js";
+
 import { adapter } from "./prisma.js";
-import { config } from "../config/config.js";
+import { config } from "../config/index.js";
+import { PrismaClient } from "../../generated/prisma/client.js";
 
 const prisma = new PrismaClient({ adapter });
 export const auth = betterAuth({
@@ -14,7 +15,7 @@ export const auth = betterAuth({
   emailVerification: {
     sendOnSignIn: true,
   },
-  trustedOrigins: [config.zop_shop_trust_origin as string],
+  trustedOrigins: [config.FRONTEND_URL],
   socialProviders: {
     google: {
       clientId: process.env.GOOGLE_CLIENT_ID as string,

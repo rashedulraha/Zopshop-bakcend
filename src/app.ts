@@ -27,7 +27,7 @@ app.use(
     origin:
       config.NODE_ENV === "development"
         ? "http://localhost:3000"
-        : process.env.FRONTEND_URL || "http://localhost:3000",
+        : config.FRONTEND_URL || "http://localhost:3000",
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     credentials: true,
   }),
