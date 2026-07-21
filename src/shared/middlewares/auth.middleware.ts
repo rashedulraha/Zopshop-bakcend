@@ -21,7 +21,7 @@ export const requireAuth = async (
 
     // Attach user to request
     req.user = session.user as unknown as AuthUser;
-    
+
     return next();
   } catch (error) {
     console.error("Auth Middleware Error:", error);
