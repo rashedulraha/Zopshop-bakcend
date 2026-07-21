@@ -39,7 +39,7 @@ export const ConfigService = {
     await this.getConfig(storeId);
 
     const updateData: any = { ...data };
-    
+
     // Explicitly handle customFields to bypass TS strict typing with Prisma Json
     if (data.customFields !== undefined) {
       updateData.customFields = data.customFields as any;
