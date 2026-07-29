@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: zopshop-backend
+    env: node
+    region: singapore
+    plan: starter
+    buildCommand: npm install && npx prisma generate && npm run build
+    startCommand: node dist/server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 8000
+      - key: DATABASE_URL
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
