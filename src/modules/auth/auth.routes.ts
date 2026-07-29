@@ -13,3 +13,4 @@ route.post("/signout", requireAuth, authControllers.signout);
 // Mount better-auth's internal routes (must be catching all under /api/auth)
 route.all("/{*any}", toNodeHandler(auth));
 export const authRoutes = route;
+

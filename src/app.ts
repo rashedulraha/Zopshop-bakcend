@@ -5,8 +5,10 @@ import express, {
   type Response,
 } from "express";
 import cors from "cors";
+import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import { config } from "./config/index.js";
+import { prisma } from "./lib/prisma.js";
 import {
   errorHandler,
   notFoundHandler,
@@ -20,14 +22,19 @@ import { authRoutes } from "./modules/auth/auth.routes.js";
 export const app: Application = express();
 
 // =======================
-// Global Middlewares
+// Global Middlewares & Security
 // =======================
+app.use(
+  helmet({
+    crossOriginResourcePolicy: { policy: "cross-origin" },
+  })
+);
 app.use(
   cors({
     origin:
       config.NODE_ENV === "development"
-        ? "http://localhost:3000"
-        : config.FRONTEND_URL || "http://localhost:3000",
+        ? ["http://localhost:3000", "http://127.0.0.1:3000"]
+        : [config.FRONTEND_URL || "http://localhost:3000"],
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     credentials: true,
   }),
@@ -42,10 +49,22 @@ app.get("/", (req: Request, res: Response) => {
   res.status(200).json({ message: "Zopshop API Server is running!" });
 });
 
-app.get("/health", (req: Request, res: Response) => {
+app.get("/health", async (req: Request, res: Response) => {
+  let dbStatus = "disconnected";
+  try {
+    await prisma.$queryRaw`SELECT 1`;
+    dbStatus = "connected";
+  } catch (err) {
+    dbStatus = "error";
+  }
+
   res.json({
     success: true,
     message: "Server is healthy",
+    environment: config.NODE_ENV,
+    database: dbStatus,
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime(),
   });
 });
 
@@ -55,6 +74,8 @@ app.get("/health", (req: Request, res: Response) => {
 
 // Auth routes (better-auth + custom me/signout)
 app.use("/api/auth", authRoutes);
+
+
 
 import { productRoutes } from "./modules/product/product.routes.js";
 
