@@ -14,7 +14,7 @@ RUN npm ci
 COPY . .
 
 # Generate Prisma Client & Build TypeScript
-RUN npx prisma generate
+RUN DATABASE_URL="postgresql://dummy:dummy@dummy:5432/dummy" npx prisma generate
 RUN npm run build
 
 # Production image stage
@@ -29,7 +29,7 @@ COPY prisma ./prisma/
 
 # Install production dependencies only
 RUN npm ci --only=production
-RUN npx prisma generate
+RUN DATABASE_URL="postgresql://dummy:dummy@dummy:5432/dummy" npx prisma generate
 
 # Copy built dist files
 COPY --from=builder /app/dist ./dist
