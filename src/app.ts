@@ -27,7 +27,7 @@ export const app: Application = express();
 app.use(
   helmet({
     crossOriginResourcePolicy: { policy: "cross-origin" },
-  })
+  }),
 );
 app.use(
   cors({
@@ -48,7 +48,7 @@ app.use(
       ) {
         return callback(null, true);
       }
-      return callback(null, true);
+      return callback(new Error("Not allowed by CORS"));
     },
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     credentials: true,
@@ -87,10 +87,20 @@ app.get("/health", async (req: Request, res: Response) => {
 // API Routes
 // =======================
 
+// Rewrite origin for dynamic frontend deployments (e.g., Vercel) so better-auth accepts them
+app.use("/api/auth", (req: Request, res: Response, next: NextFunction) => {
+  const origin = req.headers.origin;
+  if (
+    origin &&
+    (origin.endsWith(".vercel.app") || origin.endsWith(".onrender.com"))
+  ) {
+    req.headers.origin = config.FRONTEND_URL;
+  }
+  next();
+});
+
 // Auth routes (better-auth + custom me/signout)
 app.use("/api/auth", authRoutes);
-
-
 
 import { productRoutes } from "./modules/product/product.routes.js";
 
