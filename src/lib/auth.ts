@@ -11,6 +11,7 @@ export const auth = betterAuth({
   database: prismaAdapter(prisma, {
     provider: "postgresql",
   }),
+  trustHost: true,
 
   user: {
     additionalFields: {
@@ -40,7 +41,11 @@ export const auth = betterAuth({
   emailVerification: {
     sendOnSignIn: true,
   },
-  trustedOrigins: [config.FRONTEND_URL],
+  trustedOrigins: [
+    config.FRONTEND_URL,
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+  ].filter((url): url is string => Boolean(url)),
   socialProviders: {
     google: {
       clientId: process.env.GOOGLE_CLIENT_ID as string,

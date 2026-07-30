@@ -31,10 +31,25 @@ app.use(
 );
 app.use(
   cors({
-    origin:
-      config.NODE_ENV === "development"
-        ? ["http://localhost:3000", "http://127.0.0.1:3000"]
-        : [config.FRONTEND_URL || "http://localhost:3000"],
+    origin: (origin, callback) => {
+      // Allow requests with no origin (like mobile apps or curl)
+      if (!origin) return callback(null, true);
+
+      const allowedOrigins = [
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        config.FRONTEND_URL,
+      ].filter((url): url is string => Boolean(url));
+
+      if (
+        allowedOrigins.includes(origin) ||
+        origin.endsWith(".vercel.app") ||
+        origin.endsWith(".onrender.com")
+      ) {
+        return callback(null, true);
+      }
+      return callback(null, true);
+    },
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     credentials: true,
   }),
